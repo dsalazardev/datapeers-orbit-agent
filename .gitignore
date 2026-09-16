@@ -132,6 +132,11 @@ ENV/
 env.bak/
 venv.bak/
 
+.env.local
+.env.*.local
+.env.development
+.env.production
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -174,3 +179,44 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+# === ORBIT: añadidos ===
+
+# IDE (¡urgente!)
+.idea/
+.vscode/
+
+# Variables de entorno — variantes
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# Nota: .env.example SÍ se versiona (es plantilla, sin secretos)
+
+# Docker
+docker-compose.override.yml
+
+# Playwright (scraping con JS, si lo activas)
+playwright-report/
+test-results/
+playwright/.cache/
+
+# LangChain / LangGraph (cachés locales)
+.langchain/
+.langgraph/
+
+# Modelos descargados (si usas embeddings locales)
+models/
+*.gguf
+*.safetensors
+
+# Datos de prueba / scraping local
+data/scraped/
+data/embeddings/
+*.sqlite
+*.db
+
+# Logs
+logs/
+*.log
