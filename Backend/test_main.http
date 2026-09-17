@@ -9,3 +9,13 @@ GET http://127.0.0.1:8000/hello/User
 Accept: application/json
 
 ###
+
+# Pre-scrape de un sitio detrás de WAF/CDN (Hostinger). Requiere REQUEST_HEADERS.
+POST http://127.0.0.1:8000/api/v1/scraping/pre-scrape
+Content-Type: application/json
+
+{
+  "url": "https://constructoraberlin.com/"
+}
+
+###
