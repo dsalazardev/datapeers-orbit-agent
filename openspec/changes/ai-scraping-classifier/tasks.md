@@ -7,9 +7,9 @@
 
 - [x] 2.1 Definir el esquema Pydantic estricto `ProjectCard` (`is_project: bool`, `is_active_project: bool`, `title: str`, `description_summary: str | None`, `price_from: str | None`, `status_badge: Literal["Preventa","Entrega Inmediata","Agotado","Desconocido"]`, `score: int`)
 - [x] 2.2 Implementar el prompt del sistema en español con el contrato JSON y la instrucción de `price_from = null` cuando el HTML no muestra precio (antialucinación)
-- [ ] 2.3 Implementar `LLMProjectClassifier` como cliente async sobre `httpx.AsyncClient` (POST `{base_url}/chat/completions`, `Authorization: Bearer`, `response_format` json_object si aplica, timeout configurable)
-- [ ] 2.4 Parseo robusto de la respuesta (strip de fences ```` ```json ````) y validación estricta contra `ProjectCard`; respuesta no válida → señal de fallback sin propagar contenido crudo
-- [ ] 2.5 Mapear `ProjectCard` → campos aditivos de `ProjectItem` (`is_active_project`, `status_badge`, `price_from`); `description_summary` queda interno (no se expone en el API)
+- [x] 2.3 Implementar `LLMProjectClassifier` como cliente async sobre `httpx.AsyncClient` (POST `{base_url}/chat/completions`, `Authorization: Bearer`, `response_format` json_object si aplica, timeout configurable)
+- [x] 2.4 Parseo robusto de la respuesta (strip de fences ```` ```json ````) y validación estricta contra `ProjectCard`; respuesta no válida → señal de fallback sin propagar contenido crudo
+- [x] 2.5 Mapear `ProjectCard` → campos aditivos de `ProjectItem` (`is_active_project`, `status_badge`, `price_from`); `description_summary` queda interno (no se expone en el API)
 
 ## 3. Catálogo de errores
 
@@ -30,14 +30,14 @@
 ## 6. Golden dataset y tests
 
 - [ ] 6.1 Crear `Backend/tests/fixtures/scraping/golden/` con 10 URLs reales (HTML congelado) y `expected.json` (etiquetas `is_project` y precio esperado)
-- [ ] 6.2 Test: batch único — el clasificador hace UNA llamada para ≤10 candidatos (assert transporte/llamadas), nunca una por candidato
+- [x] 6.2 Test: batch único — el clasificador hace UNA llamada para ≤10 candidatos (assert transporte/llamadas), nunca una por candidato
 - [ ] 6.3 Test: schema inválido — respuesta que no valida contra `ProjectCard` → fallback determinista, sin contenido crudo
 - [ ] 6.4 Test: timeout — inyectar `LLMProjectClassifier(timeout=0.1)` con un mock que duerme 1s; la llamada agota el timeout y provoca fallback con `source=fallback` y `reason_code=ORB-SCRAPE-006` (evita esperar 8s reales en pytest)
 - [ ] 6.5 Test: fallback de red/HTTP — error del proveedor devuelve 200 OK con `is_active_project = None`, nunca 500 ni texto crudo
 - [ ] 6.6 Test: sin API key — flujo `live` devuelve ítems deterministas con `is_active_project = None` y el LLM nunca se invoca
 - [ ] 6.7 Test: campos aditivos — `ProjectItem` con `is_active_project`/`status_badge`/`price_from` correctos tras clasificar, preservando `title`/`url`/`source`
 - [ ] 6.8 Test: cache/seed sin LLM — hit de caché o seed responde < 200ms sin invocar el clasificador (mock no llamado)
-- [ ] 6.9 Test: mock OpenRouter — toda la suite usa `httpx.MockTransport`/stub; cero llamadas reales y cero consumo de tokens
+- [x] 6.9 Test: mock OpenRouter — toda la suite usa `httpx.MockTransport`/stub; cero llamadas reales y cero consumo de tokens
 - [ ] 6.10 Evaluación golden: precisión `is_project` ≥ 90% y cero alucinaciones de `price_from` (con respuestas grabadas o `ORBIT_LLM_EVAL_REAL=1`)
 - [ ] 6.11 Test: desalineación del batch — respuesta con longitud distinta a los candidatos o índices rotos (no 1:1) → fallback completo determinista
 - [ ] 6.12 Test: cero ítems post-filtro — si el LLM descarta todos los candidatos, respuesta `200 OK` con `items: []` y `meta.filtered_out = N`, sin error
