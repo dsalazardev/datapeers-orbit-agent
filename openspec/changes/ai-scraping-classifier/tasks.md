@@ -5,8 +5,8 @@
 
 ## 2. Cliente LLM (`app/modules/scraping/llm.py`)
 
-- [ ] 2.1 Definir el esquema Pydantic estricto `ProjectCard` (`is_project: bool`, `is_active_project: bool`, `title: str`, `description_summary: str | None`, `price_from: str | None`, `status_badge: Literal["Preventa","Entrega Inmediata","Agotado","Desconocido"]`, `score: int`)
-- [ ] 2.2 Implementar el prompt del sistema en español con el contrato JSON y la instrucción de `price_from = null` cuando el HTML no muestra precio (antialucinación)
+- [x] 2.1 Definir el esquema Pydantic estricto `ProjectCard` (`is_project: bool`, `is_active_project: bool`, `title: str`, `description_summary: str | None`, `price_from: str | None`, `status_badge: Literal["Preventa","Entrega Inmediata","Agotado","Desconocido"]`, `score: int`)
+- [x] 2.2 Implementar el prompt del sistema en español con el contrato JSON y la instrucción de `price_from = null` cuando el HTML no muestra precio (antialucinación)
 - [ ] 2.3 Implementar `LLMProjectClassifier` como cliente async sobre `httpx.AsyncClient` (POST `{base_url}/chat/completions`, `Authorization: Bearer`, `response_format` json_object si aplica, timeout configurable)
 - [ ] 2.4 Parseo robusto de la respuesta (strip de fences ```` ```json ````) y validación estricta contra `ProjectCard`; respuesta no válida → señal de fallback sin propagar contenido crudo
 - [ ] 2.5 Mapear `ProjectCard` → campos aditivos de `ProjectItem` (`is_active_project`, `status_badge`, `price_from`); `description_summary` queda interno (no se expone en el API)
