@@ -146,26 +146,34 @@ async def test_misaligned_batch_length_returns_none():
 
 @pytest.mark.anyio
 async def test_timeout_collapses_to_fallback():
-    """Task 6.4: a provider timeout triggers the deterministic fallback.
+    """Task 6.4: a provider that stalls triggers the hard wall-clock fallback.
 
-    The transport raises ``httpx.ReadTimeout`` — the exception httpx raises in
-    production when ``timeout`` elapses — and the classifier must collapse to
-    ``None`` (fallback), never propagate.
+    The transport sleeps far longer than ``timeout``; ``anyio.fail_after`` must
+    abort the call and the classifier must collapse to ``None`` (fallback),
+    never propagate and never wait for the slow provider.
     """
-    class TimingOutTransport(httpx.AsyncBaseTransport):
+    import time
+
+    import anyio
+
+    class StallingTransport(httpx.AsyncBaseTransport):
         async def handle_async_request(self, request):
-            raise httpx.ReadTimeout("El proveedor tardó más del timeout configurado")
+            await anyio.sleep(1.0)
+            raise AssertionError("the hard timeout must abort before this point")
 
     classifier = LLMProjectClassifier(
         api_key="test-key",
         model="deepseek/deepseek-v4-flash-0731:free",
-        transport=TimingOutTransport(),
+        transport=StallingTransport(),
         timeout=0.1,
     )
+    started = time.perf_counter()
     cards = await classifier.classify(_items(1))
+    elapsed = time.perf_counter() - started
     await classifier.aclose()
 
     assert cards is None
+    assert elapsed < 0.5, f"hard timeout did not fire (took {elapsed:.2f}s)"
 
 
 @pytest.mark.anyio

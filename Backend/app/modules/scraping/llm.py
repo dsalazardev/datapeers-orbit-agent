@@ -13,6 +13,7 @@ import json
 import logging
 from typing import Literal
 
+import anyio
 import httpx
 from pydantic import BaseModel, Field, ValidationError
 
@@ -158,26 +159,33 @@ class LLMProjectClassifier:
         n = len(items)
         try:
             client = self._get_client()
-            response = await client.post(
-                f"{self._base_url}/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {self._api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": self._model,
-                    "messages": [
-                        {"role": "system", "content": SYSTEM_PROMPT},
-                        {
-                            "role": "user",
-                            "content": _build_batch_prompt(items),
-                        },
-                    ],
-                    "response_format": {"type": "json_object"},
-                    "max_tokens": self._max_tokens,
-                },
-                timeout=self._timeout,
+            with anyio.fail_after(self._timeout):
+                response = await client.post(
+                    f"{self._base_url}/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {self._api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "model": self._model,
+                        "messages": [
+                            {"role": "system", "content": SYSTEM_PROMPT},
+                            {
+                                "role": "user",
+                                "content": _build_batch_prompt(items),
+                            },
+                        ],
+                        "response_format": {"type": "json_object"},
+                        "max_tokens": self._max_tokens,
+                    },
+                    timeout=self._timeout,
+                )
+        except TimeoutError:
+            logger.warning(
+                "llm_classification_timeout",
+                extra={"evt": "llm_classification_fallback", "phase": "timeout"},
             )
+            return None
         except httpx.HTTPError:
             logger.warning(
                 "llm_classification_failed",
