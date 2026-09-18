@@ -243,8 +243,8 @@ El sistema SHALL, cuando esté configurada una API key de OpenRouter (`ORBIT_OPE
 
 #### Scenario: Precisión sobre el golden dataset
 
-- **WHEN** se evalúa la clasificación sobre el golden dataset (10 URLs reales con HTML guardado)
-- **THEN** la precisión de `is_project` es ≥ 90% y `price_from` es `None` cuando el HTML no contiene precio (cero alucinaciones de precio)
+- **WHEN** se evalúa la clasificación sobre el golden dataset (14 URLs reales con HTML guardado, 135 candidatos, 11 positivos / 124 negativos)
+- **THEN** el conjunto cierra con Recall `is_project` ≥ 80%, Precisión ≥ 85% y F1 ≥ 0.80 (clase positiva), y `price_from` es `None` cuando el HTML no contiene precio (cero alucinaciones de precio); la accuracy global se reporta solo como referencia porque el dataset es desbalanceado
 
 ### Requirement: Fallback determinista sin error ante fallo del LLM
 

@@ -113,3 +113,12 @@ Evaluación con mocks/respuestas grabadas opcional vía variable `ORBIT_LLM_EVAL
 - ¿`description_summary` debe exponerse en el API en este change o solo en el rediseño de UI? (Propuesto: solo UI, ahora interno).
 - ¿El free-tier es suficiente para la demo o se prefiere un modelo de pago barato por defecto? (`deepseek/deepseek-v4-flash-0731` paid está disponible; el fallback cubre el free si falla).
 - Timeout estricto sin reintentos (D4): **resuelto** — una sola llamada, sin retries, para no degradar la latencia P95; la resiliencia la asume el fallback determinista.
+
+## Notas de comportamiento y deuda técnica conocida
+
+Documentado al cerrar el change (2026-09-18) — NO bloquea el cierre, pero describe el comportamiento real observado en producción con el modelo free-tier y qué quedó como trabajo futuro.
+
+1. **Latencia del free-tier**: la grabación del golden dataset midió picos de 40-90s en `deepseek/deepseek-v4-flash-0731:free` bajo carga (registros de captura con `timeout=180s` y reintentos). La métrica de éxito original "P95 < 10s con LLM" **no está demostrada** con el modelo free real. Los tests solo verifican que la cota dura aborta a 8s (slow-drip), no que una respuesta legítima llegue antes de 10s.
+2. **Degradación por la cota de 8s**: la cota dura de `anyio.fail_after(8s)` (D3) implica que, en el free-tier bajo carga, una fracción de las llamadas superará los 8s y degradará silenciosamente al **fallback determinista** (`source=fallback`, `is_active_project=None`). El endpoint nunca falla (200 OK con ítems deterministas o `items: []`), pero el usuario verá resultados sin validación semántica en esos casos. Es un trade-off aceptado: la demo degrada a heurística, nunca a error.
+3. **Métricas de cierre medidas sobre respuestas grabadas**: Precision/Recall/F1 se computan sobre `recorded_responses.json` (grabaciones reales de OpenRouter congeladas), no sobre re-ejecución en vivo que reconsuma tokens. El path live permanece disponible vía `ORBIT_LLM_EVAL_REAL=1` para re-evaluación puntual.
+4. **Deuda**: (a) evaluar un modelo de pago `deepseek/deepseek-v4-flash-0731` para confirmar P95 < 10s y mejorar Recall (81.8% está pegado al umbral 80%: Shalom y Bosques de las victorias son marginados por el free-tier); (b) re-ejecutar el golden en vivo tras cambios de modelo o prompt; (c) si la demo requiere resiliencia en las fichas, considerar reintentos limitados o una segunda llamada, que hoy están fuera de diseño por latencia/coste.
