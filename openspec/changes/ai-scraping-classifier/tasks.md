@@ -1,7 +1,7 @@
 ## 1. Configuración LLM
 
-- [ ] 1.1 Añadir a `Backend/app/core/settings.py` los campos `openrouter_api_key: str | None = None`, `llm_model: str = "deepseek/deepseek-v4-flash-0731:free"`, `llm_timeout: float = 8.0` y `llm_max_tokens: int = 4096`
-- [ ] 1.2 Documentar `ORBIT_OPENROUTER_API_KEY`, `ORBIT_LLM_MODEL`, `ORBIT_LLM_TIMEOUT`, `ORBIT_LLM_MAX_TOKENS` en `Backend/.env.example`
+- [x] 1.1 Añadir a `Backend/app/core/settings.py` los campos `openrouter_api_key: str | None = None`, `llm_model: str = "deepseek/deepseek-v4-flash-0731:free"`, `llm_timeout: float = 8.0` y `llm_max_tokens: int = 4096`
+- [x] 1.2 Documentar `ORBIT_OPENROUTER_API_KEY`, `ORBIT_LLM_MODEL`, `ORBIT_LLM_TIMEOUT`, `ORBIT_LLM_MAX_TOKENS` en `Backend/.env.example`
 
 ## 2. Cliente LLM (`app/modules/scraping/llm.py`)
 

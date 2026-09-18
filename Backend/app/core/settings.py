@@ -25,3 +25,8 @@ class Settings(BaseSettings):
     scraper_seed_file: str | None = None
     scraper_seed_enabled: bool = True
     scraper_cache_ttl: int = 3600
+
+    openrouter_api_key: str | None = None
+    llm_model: str = "deepseek/deepseek-v4-flash-0731:free"
+    llm_timeout: float = 8.0
+    llm_max_tokens: int = 4096
