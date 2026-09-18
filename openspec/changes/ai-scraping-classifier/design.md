@@ -14,7 +14,7 @@ No existe todavía ninguna dependencia LLM en el repo (`httpx` como cliente asyn
 - Enriquecer `ProjectItem` de forma aditiva (`is_active_project`, `status_badge`, `price_from`) sin romper el contrato existente (`title`, `url`, `source`).
 - Fallback determinista silencioso sin API key, con timeout (8s) o ante error de red/HTTP/esquema; nunca un error 500 al usuario por causa del LLM.
 - No bloquear el event loop (I/O `await`), resolver cache/seed sin invocar el LLM, y cero llamadas reales en la suite (mocks).
-- Precisión `is_project` ≥ 90% y cero alucinaciones de `price_from` sobre un golden dataset de 10 URLs reales.
+- Recall `is_project` ≥ 80%, Precision ≥ 85%, F1 ≥ 0.80 sobre un golden dataset representativo (≥ 10 URLs positivas reales y ≥ 10 negativas, 135 candidatos, 14 sitios). Cero alucinaciones de `price_from`.
 
 **Non-Goals:**
 - RAG, vector DB o embeddings.
@@ -34,11 +34,27 @@ Se crea un único archivo `llm.py` en el paquete del módulo que concentra: (a) 
 
 ### D2: Batching — una llamada por solicitud
 
-La llamada incluye los ≤10 candidatos (`title`, `url`, `source`) en un único `user` message con índices 1..N y exige una respuesta JSON estructurada alineada a esos índices. Razones: (1) minimiza latencia y coste (1 round-trip), (2) el límite natural de 10 ítems hace innecesaria la segmentación en múltiples llamadas, y (3) simplifica el fallback (todo o nada). La petición usa `response_format: {"type": "json_object"}`, cuyo soporte fue **verificado en vivo** (2026-09-17) sobre `deepseek/deepseek-v4-flash-0731:free`: devolvió `finish_reason=stop` y JSON válido con coste 0. **Ajuste de contrato verificado (2026-09-17)**: con `json_object`, el modelo free responde un OBJETO top-level, no un array — por lo que el contrato de respuesta es un objeto indexado `{"1": {...}, "2": {...}}` con una clave por candidato en orden 1..N (compatible con `json_object` y con la alineación 1:1). El parseo robusto acepta tanto el objeto indexado como un array plano (defensa en profundidad ante modelos que ignoren el shape), y exige `len(respuesta) == len(candidatos)`; si no alinea o no valida contra `ProjectCard` → fallback completo.
+La llamada incluye los ≤10 candidatos (`title`, `url`, `source`) en un único `user` message con índices 1..N y exige una respuesta JSON estructurada alineada a esos índices. Razones: (1) minimiza latencia y coste (1 round-trip), (2) el límite natural de 10 ítems hace innecesaria la segmentación en múltiples llamadas, y (3) simplifica el fallback (todo o nada). La petición usa `response_format: {"type": "json_object"}`, cuyo soporte fue **verificado en vivo** (2026-09-17) sobre `deepseek/deepseek-v4-flash-0731:free`: devolvió `finish_reason=stop` y JSON válido con coste 0.
+
+**Contrato de respuesta — dos formatos aceptados (verificado 2026-09-18).** El parseo normaliza ambas formas a una lista ordenada 1..N antes de validar y alinear:
+
+1. **Objeto indexado (forma real de `json_object`)**: `{"1": {…}, "2": {…}, …}`, una clave por candidato en orden. Es lo que devuelve el modelo free con `response_format=json_object` (el fixture `raw_openrouter_response.json` es el string exacto capturado en vivo). **Procedencia del espacio inicial**: el fixture empieza con un espacio en blanco antes del `{`; se verificó en vivo (2026-09-18) con una llamada directa httpx a OpenRouter que `repr(content)[0:100] == ' {"ok":true}…'`, confirmando que el espacio es emitido por el modelo, no un artefacto de captura de PowerShell. El parser lo tolera (`content.strip()` en `_extract_json_payload`).
+2. **Array plano (defensa en profundidad)**: `[{…}, {…}, …]`, para modelos/proveedores que ignoren el shape indexado o devuelvan un top-level array.
+
+El cliente exige `len(respuesta) == len(candidatos)` tras normalizar; si no alinea, si el objeto indexado no cubre 1..N o si algún elemento no valida contra `ProjectCard` → fallback completo (D4). El test de contrato 6.13 fija ambos formatos a partir de payloads reales.
+
+**Normalización de títulos (comportamiento deseado, verificado 2026-09-18).** El modelo reformatea los títulos de los candidatos, removiendo el texto de marketing que el HTML concatena (precios "Desde $...", "Unidades desde...", descripciones de ventas — como en las tarjetas de fincaraiz) y quedándose con el nombre legible del proyecto (p. ej. "Mirador del parque", "Bau 69"). Esto es un beneficio: los títulos llegan limpios al frontend. Como consecuencia, los títulos grabados en `recorded_responses.json` pueden diferir de los candidatos originales en `expected.json`, por lo que `_align_cards` y la evaluación golden (D8) alinean **por índice** (orden 1..N exigido por el prompt), nunca por título.
 
 ### D3: Cliente HTTP y no-bloqueo
 
-Se usa `httpx.AsyncClient` dedicado (independiente del client de fetch del servicio) apuntando a `{base_url}/chat/completions` con headers `Authorization: Bearer {api_key}`. Toda la llamada es `await` de I/O en el event loop — sin `parse HTML` CPU-bound, por lo que NO se usa `to_thread`. El client comparte la política de timeout configurable (`ORBIT_LLM_TIMEOUT`, default 8s) aplicada por llamada, y NO reintenta: una sola llamada estricta; la resiliencia recae en el fallback determinista (D4) para no degradar la latencia P95. Un único `AsyncClient` se construye en el wiring y se cierra en el lifespan de la app; alternativa aceptada en tests: inyección de transporte (`httpx.MockTransport`) para cero llamadas reales.
+Se usa `httpx.AsyncClient` dedicado (independiente del client de fetch del servicio) apuntando a `{base_url}/chat/completions` con headers `Authorization: Bearer {api_key}`. Toda la llamada es `await` de I/O en el event loop — sin `parse HTML` CPU-bound, por lo que NO se usa `to_thread`. El client NO reintenta: una sola llamada estricta; la resiliencia recae en el fallback determinista (D4) para no degradar la latencia P95. Un único `AsyncClient` se construye en el wiring y se cierra en el lifespan de la app; alternativa aceptada en tests: inyección de transporte (`httpx.MockTransport`) para cero llamadas reales.
+
+**Doble capa de timeout.** El límite de 8s (`ORBIT_LLM_TIMEOUT`) se aplica en dos niveles complementarios:
+
+1. **Timeout httpx por operación** (`timeout=self._timeout` en el client): acota connect/read-y-write por hueco. Necesario, pero **insuficiente**: el temporizador de lectura se reinicia con cada fragmento, así que un proveedor que envía la respuesta "a gotas" mantiene la conexión viva indefinidamente (verificado en vivo 2026-09-18: con `timeout=8s` una respuesta a gotas tardó 47s).
+2. **Cota dura de reloj de pared con `anyio.fail_after(self._timeout)`** envolviendo `client.post(...)`: garantiza que la llamada completa se aborta al cumplirse los 8s, sin importar el patrón de entrega del proveedor. Al cancelarse, se cierra el stream/respuesta (el `finally` del stream libera el recurso) y el `TimeoutError` se traduce a fallback. Es la capa que hace efectivo el "timeout estricto" del contrato (D4).
+
+La combinación evita que un free-tier lento bloquee el endpoint decenas de segundos; sin la capa (2), el `timeout` de httpx no acota el caso patológico. El test 6.4 (stall total) y el test slow-drip (entrega fraccionada) cubren ambas capas.
 
 ### D4: Fallback determinista y logging
 
@@ -66,12 +82,15 @@ Nuevas variables en `Settings` (prefijo `ORBIT_` ya activo): `openrouter_api_key
 
 ### D8: Golden dataset y evaluación
 
-Se versiona `Backend/tests/fixtures/scraping/golden/` con 10 URLs reales (HTML congelado + `expected.json` con etiquetas `is_project` y precio esperado). Evaluación con mocks/respuestas grabadas opcional vía variable `ORBIT_LLM_EVAL_REAL=1`; por defecto la evaluación sólo corre con respuestas grabadas o stub para no consumir tokens en CI. Métricas: precisión `is_project` ≥ 90% y `price_from = None` cuando el HTML no contiene señal de precio (antialucinación).
+Se versiona `Backend/tests/fixtures/scraping/golden/` con 14 URLs reales (HTML congelado + `expected.json` con etiquetas `is_project` y precio esperado). Las URLs incluyen sites de múltiples dominios (construccionesmarval, conconcreto, camacol, metrocuadrado, pisos, fincaraiz, sancarlos, elcampo, inmobiliaria, portafolio) con listados de fincaraiz que aportan ≥ 10 tarjetas de proyectos reales (departamentos, casas, oficinas en desarrollo, apartaestudios, lotes urbanizables) como positivos y ≥ 10 meta/paginación/navegación como negativos.
+
+Evaluación con mocks/respuestas grabadas opcional vía variable `ORBIT_LLM_EVAL_REAL=1`; por defecto la evaluación corre con respuestas grabadas o stub para no consumir tokens en CI. **La grabación del golden usó `timeout=180s` con reintentos para registrar el output completo del modelo en cada sitio nuevo, incluso ante la volatilidad del free-tier (picos de 40-90s); es un tiempo de captura off-line, NO el comportamiento de producción** — en producción rige la cota dura de 8s (D3/D4). Las respuestas grabadas para sitios 11-14 se obtuvieron con timeout 180s y reintentos ante volatilidad del free-tier; los títulos de las respuestas LLM pueden acortarse respecto al candidato original, por lo que la métrica alinea por índice (orden 1..N) y no por título. Métricas de cierre (clase positiva): Recall ≥ 80%, Precision ≥ 85%, F1 ≥ 0.80 y `price_from = None` cuando el HTML no contiene señal de precio (antialucinación).
 
 ## Risks / Trade-offs
 
 - [Free-tier de OpenRouter con rate limits / inestabilidad del modelo `:free`] → Mitigación: fallback determinista (D4) y el modelo es configurable vía `ORBIT_LLM_MODEL`; la demo degrada a heurística, nunca a error.
 - [Latencia del path `live` supera el P95 < 500ms del determinista] → Mitigación: la spec se acota en el delta — P95 < 500ms queda acotado a paths deterministas (cache/seed/LLM off o stub); con LLM el objetivo es no-bloqueo y P95 < 10s; el fallback responde < 500ms.
+- [Proveedor lento que envía la respuesta a gotas: el timeout de httpx se reinicia por fragmento y la llamada podría durar > 8s] → Mitigación: cota dura de reloj de pared con `anyio.fail_after(8s)` envolviendo el `post` (D3), que aborta y libera el stream aunque los bytes sigan llegando; cubierto por el test slow-drip (entrega fraccionada cada 0.5s) además del test de stall total. Se acepta el trade-off de que una respuesta legítimamente lenta se descarta al cumplir 8s y cae al fallback determinista en vez de esperar.
 - [Structured output no garantizado en todos los modelos free] → Mitigación: `response_format` si está soportado + prompt estricto + parseo robusto + validación `ProjectCard` + fallback si no valida; los casos se cubren en el test de schema.
 - [Coste si se llama por cada `live`] → 1 llamada por request (≤10 ítems), modelo ligero por defecto, cero tokens en tests (MockTransport), y la clasificación queda deshabilitada sin key.
 - [Alucinación de precio] → en el prompt se fuerza `price_from = null` si no hay precio explícito; métrica de antialucinación sobre el golden dataset.

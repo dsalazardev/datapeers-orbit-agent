@@ -874,6 +874,374 @@
         "status_badge": "Desconocido",
         "score": 0
       }
+    ],
+    "site_11": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Colombia",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": true,
+        "is_active_project": true,
+        "title": "Mirador del parque",
+        "description_summary": "Proyecto de vivienda de interés social en Jamundí, rodeado de zonas verdes y un gran lago.",
+        "price_from": "$ 233.452.000",
+        "status_badge": "Desconocido",
+        "score": 98
+      },
+      {
+        "is_project": true,
+        "is_active_project": true,
+        "title": "Life 72 oficinas",
+        "description_summary": "Oficinas en el centro financiero de Bogotá, cerca a la Zona G y la Universidad Sergio Arboleda, con posibilidad de unir unidades.",
+        "price_from": "$ 426.828.000",
+        "status_badge": "Desconocido",
+        "score": 98
+      },
+      {
+        "is_project": true,
+        "is_active_project": true,
+        "title": "Valle alto de la pradera",
+        "description_summary": "Lote en La Calera con zonas verdes, tranquilidad, áreas comunes y vigilancia 24 horas.",
+        "price_from": "$ 621.600.000",
+        "status_badge": "Desconocido",
+        "score": 90
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "2",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "3",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "4",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "5",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "6",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "7",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      }
+    ],
+    "site_12": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Colombia página 3",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": true,
+        "is_active_project": true,
+        "title": "Desde $ 864.480.000 Casa Lote en Cn. praderas de verde horizonte, Jamundí, Valle del cauca",
+        "description_summary": "Casas campestres de 1 piso en Verdehorizonte con áreas de 164 m2 en lotes desde 400m2.",
+        "price_from": "$ 864.480.000",
+        "status_badge": "Desconocido",
+        "score": 90
+      },
+      {
+        "is_project": true,
+        "is_active_project": true,
+        "title": "Desde $ 1.456.330.000 Casa en Cajicá, Cundinamarca",
+        "description_summary": "Casas y lotes campestres en condominio con club house, piscina y zonas deportivas.",
+        "price_from": "$ 1.456.330.000",
+        "status_badge": "Desconocido",
+        "score": 90
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "<",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "1",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "4",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "5",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "6",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "7",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Venta",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      }
+    ],
+    "site_13": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Medellín",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 15
+      },
+      {
+        "is_project": true,
+        "is_active_project": true,
+        "title": "Bau 69",
+        "description_summary": "Proyecto de apartaestudios tipo Loft en construcción en Laureles, Medellín.",
+        "price_from": "$ 320.000.000",
+        "status_badge": "Desconocido",
+        "score": 95
+      },
+      {
+        "is_project": true,
+        "is_active_project": true,
+        "title": "Living 97",
+        "description_summary": "Única torre de 8 pisos con 32 unidades, entrega inmediata cerca de la estación San Javier.",
+        "price_from": "$ 265.000.000",
+        "status_badge": "Entrega Inmediata",
+        "score": 95
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de vivienda",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Venta",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 1
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Arriendo",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 1
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos De Vivienda en Cali",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos De Vivienda en Barranquilla",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos De Vivienda en Bogotá",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos De Vivienda en Villavicencio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      }
+    ],
+    "site_14": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Colombia página 2",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": true,
+        "is_active_project": true,
+        "title": "Desde $ 233.000.000 Lote en Barú, Cartagena, Bolivar Unidades desde: 0 Baño 225 m² Coral bay marina club, lote en venta en barú, cartagena Lotes en la Isla de Baru, Sector Portonaito Contactar",
+        "description_summary": "Lote en venta en Barú, Cartagena, sector Portonaito, dentro de Coral Bay Marina Club.",
+        "price_from": "$ 233.000.000",
+        "status_badge": "Desconocido",
+        "score": 95
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "<",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "3",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "4",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "5",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "6",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "7",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Venta",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Arriendo",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      }
     ]
   }
 }

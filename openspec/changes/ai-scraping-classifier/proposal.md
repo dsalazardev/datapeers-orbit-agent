@@ -32,10 +32,32 @@ El pre-scraper determinista (`parser.py`) alcanzó su límite: cada regla nueva 
 
 ## Métricas de éxito
 
-- Precisión de `is_project` ≥ 90% sobre golden dataset (10 URLs reales con HTML guardado).
-- Latencia P95 del endpoint con LLM < 10s; con fallback < 500ms.
+El dataset es desbalanceado (muchos más negativos que positivos), por lo que la accuracy global **no** cierra el change. Las métricas de cierre se centran en la clase positiva:
+
+- **Recall** (`is_project`) ≥ 80% sobre golden dataset (≥ 10 URLs positivas reales, ≥ 10 negativas).
+- **Precision** (`is_project`) ≥ 85%.
+- **F1** (`is_project`) ≥ 0.80.
 - Cero alucinaciones de `price_from` sobre golden dataset (si el HTML no tiene precio, `price_from = None`).
+- Latencia P95 del endpoint con LLM < 10s; con fallback < 500ms.
 - Suite verde: tests existentes + ≥ 6 nuevos (batch, schema, timeout, fallback, sin key, mock OpenRouter).
+
+### Resultado medido (golden dataset, 135 candidatos — desglose TP/FP/FN)
+
+Evaluación sobre `Backend/tests/fixtures/scraping/golden/` (14 URLs reales, HTML congelado, 11 positivos / 124 negativos), con respuestas grabadas de OpenRouter (grabación de sitio nuevo con timeout 180s, reintentos ante volatilidad del free-tier):
+
+| Métrica | Valor | Cierre |
+| --- | --- | --- |
+| TP (positivo → positivo) | **9** | |
+| FP (negativo → positivo) | **0** | |
+| FN (positivo → negativo) | **2** | |
+| TN (negativo → negativo) | **124** | |
+| **Precision** | **100%** | ≥ 85% ✓ |
+| **Recall** | **81.8%** | ≥ 80% ✓ |
+| **F1** | **90.0%** | ≥ 0.80 ✓ |
+| accuracy (referencia) | 98.5% | (no cierra) |
+| Alucinaciones `price_from` | **0** | = 0 ✓ |
+
+Los 2 FN corresponden a `Shalom` y `Bosques de las victorias` (site_06, fincaraiz — tarjetas de proyectos residenciales reales que el modelo free-classify como no-proyecto, score 10). Las 9 TP incluyen desarrollo inmobiliario (mirador-del-parque, valle-alto-de-la-pradera, coral-bay, praderas-de-verde-horizonte), oficinas en proyecto mixto (life-72), apartaestudios (bau-69, living-97) y el caso existente San Carlos. Zero FP confirma que la capa no contamina la demo con blogs/cuotas; el recall 81.8% supera el umbral honesto de 80% al incluir proyectos reales con tarjetas "Desde $..." en múltiples listados de fincaraiz.
 
 ## Capabilities
 

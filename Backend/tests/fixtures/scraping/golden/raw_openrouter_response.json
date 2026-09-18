@@ -1,0 +1,29 @@
+ {
+  "1": {
+    "is_project": true,
+    "is_active_project": false,
+    "title": "Proyecto Alfa",
+    "description_summary": null,
+    "price_from": null,
+    "status_badge": "Desconocido",
+    "score": 70
+  },
+  "2": {
+    "is_project": false,
+    "is_active_project": false,
+    "title": "Blog de tendencias",
+    "description_summary": null,
+    "price_from": null,
+    "status_badge": "Desconocido",
+    "score": 0
+  },
+  "3": {
+    "is_project": true,
+    "is_active_project": true,
+    "title": "Torres del Parque - Apartamentos en preventa",
+    "description_summary": null,
+    "price_from": null,
+    "status_badge": "Preventa",
+    "score": 100
+  }
+}
