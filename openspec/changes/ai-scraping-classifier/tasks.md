@@ -22,10 +22,10 @@
 
 ## 5. Integración y wiring
 
-- [ ] 5.1 Inyectar `classifier: LLMProjectClassifier | None = None` en `PreScraperService`; en el flujo `live`, post-normalización y pre-respuesta: clasificar, descartar `is_project == false`, enriquecer ítems y re-aplicar `MAX_ITEMS`
-- [ ] 5.2 Fallback en `PreScraperService`: sin key / timeout (8s) / error de red / HTTP no-2xx / schema inválido → ítems deterministas con `is_active_project = None`, sin error 500 al usuario, log `source=fallback` con `reason_code=ORB-SCRAPE-006`
-- [ ] 5.3 Construir e inyectar el clasificador en `create_app()`/`_default_pre_scraper` (solo si hay API key), expuesto en `app.state.pre_scraper`; cache/seed nunca invocan el LLM
-- [ ] 5.4 Cero ítems post-filtro: si el LLM descarta todos los candidatos, responder `200 OK` con `items: []` y `meta.filtered_out = N` (sin error)
+- [x] 5.1 Inyectar `classifier: LLMProjectClassifier | None = None` en `PreScraperService`; en el flujo `live`, post-normalización y pre-respuesta: clasificar, descartar `is_project == false`, enriquecer ítems y re-aplicar `MAX_ITEMS`
+- [x] 5.2 Fallback en `PreScraperService`: sin key / timeout (8s) / error de red / HTTP no-2xx / schema inválido → ítems deterministas con `is_active_project = None`, sin error 500 al usuario, log `source=fallback` con `reason_code=ORB-SCRAPE-006`
+- [x] 5.3 Construir e inyectar el clasificador en `create_app()`/`_default_pre_scraper` (solo si hay API key), expuesto en `app.state.pre_scraper`; cache/seed nunca invocan el LLM
+- [x] 5.4 Cero ítems post-filtro: si el LLM descarta todos los candidatos, responder `200 OK` con `items: []` y `meta.filtered_out = N` (sin error)
 
 ## 6. Golden dataset y tests
 

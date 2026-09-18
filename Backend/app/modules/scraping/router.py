@@ -7,7 +7,11 @@ from app.modules.scraping.errors import (
     ScrapeReasonCode,
     error_payload,
 )
-from app.modules.scraping.schemas import PreScrapeRequest, PreScrapeResponse
+from app.modules.scraping.schemas import (
+    PreScrapeRequest,
+    PreScrapeResponse,
+    ScrapeMeta,
+)
 from app.modules.scraping.service import PreScraperService
 
 router = APIRouter(prefix="/scraping", tags=["scraping"])
@@ -29,6 +33,9 @@ async def pre_scrape(
         url=request.url,
         items=result.items,
         truncated=result.truncated,
+        meta=ScrapeMeta(filtered_out=result.filtered_out)
+        if result.filtered_out > 0
+        else None,
     )
 
 

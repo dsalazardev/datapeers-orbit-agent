@@ -21,6 +21,7 @@ import httpx
 from app.modules.scraping.cache import CacheEntry, JsonFilePrefetchCache
 from app.modules.scraping.config import ScraperConfig
 from app.modules.scraping.errors import ScrapeError, ScrapeReasonCode
+from app.modules.scraping.llm import LLMProjectClassifier, map_card_to_item
 from app.modules.scraping.parser import extract_candidates, parse_html
 from app.modules.scraping.schemas import ProjectItem
 
@@ -30,17 +31,19 @@ FetchSource = Literal["cache", "seed", "live"]
 
 
 class PreScrapeResult:
-    __slots__ = ("items", "truncated", "source")
+    __slots__ = ("items", "truncated", "source", "filtered_out")
 
     def __init__(
         self,
         items: list[ProjectItem],
         truncated: bool,
         source: FetchSource,
+        filtered_out: int = 0,
     ) -> None:
         self.items = items
         self.truncated = truncated
         self.source = source
+        self.filtered_out = filtered_out
 
 
 class PreScraperService:
@@ -49,10 +52,12 @@ class PreScraperService:
         config: ScraperConfig,
         cache: JsonFilePrefetchCache,
         client: httpx.AsyncClient | None = None,
+        classifier: LLMProjectClassifier | None = None,
     ) -> None:
         self._config = config
         self._cache = cache
         self._client = client
+        self._classifier = classifier
 
     async def pre_scrape(self, url: str, max_items: int = 10) -> PreScrapeResult:
         target = str(url)
@@ -105,9 +110,26 @@ class PreScraperService:
                 )
             raise ScrapeError.for_code(ScrapeReasonCode.INVALID_RESPONSE)
 
+        if self._classifier is not None:
+            items, filtered_out = await self._classify_live(items)
+            if not items:
+                return PreScrapeResult(
+                    items=[],
+                    truncated=truncated,
+                    source="live",
+                    filtered_out=filtered_out,
+                )
+        else:
+            filtered_out = 0
+
         await self._cache.put(target, self._serialize_items(items), truncated)
         logger.info("pre_scrape_live", extra={"source": "live"})
-        return PreScrapeResult(items=items[:max_items], truncated=truncated, source="live")
+        return PreScrapeResult(
+            items=items[:max_items],
+            truncated=truncated,
+            source="live",
+            filtered_out=filtered_out,
+        )
 
     async def _fetch(self, target: str) -> tuple[bytes, bool]:
         headers = self._config.request_headers
@@ -145,6 +167,32 @@ class PreScraperService:
                 )
             )
         return items, False
+
+    async def _classify_live(
+        self, items: list[ProjectItem]
+    ) -> tuple[list[ProjectItem], int]:
+        """Run the LLM batch classifier with a hard fallback (design D4).
+
+        Any failure (timeout, network, non-2xx, invalid schema, misalignment)
+        collapses to the deterministic items with ``is_active_project = None``,
+        logged as a fallback; the user never sees a 5xx or raw LLM content.
+        """
+        cards = await self._classifier.classify(items)
+        if cards is None:
+            logger.warning(
+                "llm_classification_fallback",
+                extra={
+                    "evt": "llm_classification_fallback",
+                    "source": "fallback",
+                    "reason_code": ScrapeReasonCode.LLM_UNAVAILABLE.value,
+                },
+            )
+            return items, 0
+        kept: list[ProjectItem] = []
+        for item, card in zip(items, cards):
+            if card.is_project:
+                kept.append(map_card_to_item(item, card))
+        return kept, len(items) - len(kept)
 
     @staticmethod
     def _error_for_fetch(exc: httpx.HTTPError) -> ScrapeError:

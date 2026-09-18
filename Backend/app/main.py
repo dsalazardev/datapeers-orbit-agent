@@ -33,6 +33,7 @@ from app.modules.ingestion.infrastructure.store import InMemoryOnboardingStateSt
 from app.modules.ingestion.router import router as ingestion_router
 from app.modules.scraping.cache import JsonFilePrefetchCache
 from app.modules.scraping.config import ScraperConfig
+from app.modules.scraping.llm import LLMProjectClassifier
 from app.modules.scraping.router import router as scraping_router
 from app.modules.scraping.service import PreScraperService
 
@@ -55,7 +56,15 @@ def _default_pre_scraper(settings: Settings) -> PreScraperService:
         ttl_seconds=settings.scraper_cache_ttl,
         seed_enabled=settings.scraper_seed_enabled,
     )
-    return PreScraperService(config=config, cache=cache)
+    classifier = None
+    if settings.openrouter_api_key:
+        classifier = LLMProjectClassifier(
+            api_key=settings.openrouter_api_key,
+            model=settings.llm_model,
+            timeout=settings.llm_timeout,
+            max_tokens=settings.llm_max_tokens,
+        )
+    return PreScraperService(config=config, cache=cache, classifier=classifier)
 
 
 def create_app(
