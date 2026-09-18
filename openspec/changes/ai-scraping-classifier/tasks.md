@@ -13,12 +13,12 @@
 
 ## 3. Catálogo de errores
 
-- [ ] 3.1 Añadir `LLM_UNAVAILABLE = "ORB-SCRAPE-006"` (log-only, sin http_status de error) al catálogo de `errors.py`, usado solo en logging de fallback
+- [x] 3.1 Añadir `LLM_UNAVAILABLE = "ORB-SCRAPE-006"` (log-only, sin http_status de error) al catálogo de `errors.py`, usado solo en logging de fallback
 
 ## 4. Contrato aditivo
 
-- [ ] 4.1 Ampliar `ProjectItem` en `schemas.py` con `is_active_project: bool | None = None`, `status_badge: Literal["Preventa","Entrega Inmediata","Agotado","Desconocido"] | None = None`, `price_from: str | None = None`, preservando `title`, `url`, `source`
-- [ ] 4.2 Añadir `meta: ScrapeMeta | None = None` (con `filtered_out: int`) a `PreScrapeResponse` en `schemas.py`
+- [x] 4.1 Ampliar `ProjectItem` en `schemas.py` con `is_active_project: bool | None = None`, `status_badge: Literal["Preventa","Entrega Inmediata","Agotado","Desconocido"] | None = None`, `price_from: str | None = None`, preservando `title`, `url`, `source`
+- [x] 4.2 Añadir `meta: ScrapeMeta | None = None` (con `filtered_out: int`) a `PreScrapeResponse` en `schemas.py`
 
 ## 5. Integración y wiring
 

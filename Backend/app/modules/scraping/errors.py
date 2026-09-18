@@ -18,6 +18,7 @@ class ScrapeReasonCode(str, Enum):
     INVALID_RESPONSE = "ORB-SCRAPE-003"  # respuesta sin ítems válidos construibles
     UPSTREAM_BLOCKED = "ORB-SCRAPE-004"  # 403/robots/WAF/CDN detectado (reservado)
     CACHE_UNAVAILABLE = "ORB-SCRAPE-005"  # caché/seed inaccesible (reservado)
+    LLM_UNAVAILABLE = "ORB-SCRAPE-006"  # clasificador LLM no disponible (log-only)
 
 
 HTTP_STATUS_BY_CODE: Mapping[ScrapeReasonCode, int] = {

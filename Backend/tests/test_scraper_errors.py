@@ -20,7 +20,13 @@ URL = "https://andina.example/proyectos"
 
 
 def test_catalog_covers_every_reason_code():
-    assert set(HTTP_STATUS_BY_CODE) == set(ScrapeReasonCode)
+    """Every code surfaced to the client must have a stable HTTP status.
+
+    Log-only codes (design D4, e.g. ``ORB-SCRAPE-006``) are intentionally NOT
+    in the HTTP map: they never produce a 5xx, they only appear in logs.
+    """
+    assert set(HTTP_STATUS_BY_CODE) <= set(ScrapeReasonCode)
+    assert ScrapeReasonCode.LLM_UNAVAILABLE not in HTTP_STATUS_BY_CODE
 
 
 def test_error_payload_is_normalized_and_safe():
