@@ -75,8 +75,6 @@ El sistema SHALL mantener un caché local (filesystem/JSON) de resultados de pre
 - **WHEN** se completa un pre-scrape exitoso
 - **THEN** el resultado se almacena en caché local (filesystem/JSON) para futuros hits
 
-## MODIFIED Requirements
-
 ### Requirement: Fallo de red o URL inalcanzable
 
 El sistema SHALL responder todo fallo de red o URL inalcanzable del pre-scrape con un `reason_code` estable (ORB-SCRAPE-XXX) mediante `502 Bad Gateway` (o equivalente de cliente/servidor), sin crashear y sin exponer el texto crudo de la excepción (ORB-NFR-005). Si existe caché local o seeded fallback disponible, el sistema SHALL preferir resolver la solicitud por esa vía en menos de 200ms.
@@ -92,6 +90,8 @@ Trazabilidad: ORB-NFR-005.
 
 - **WHEN** la URL no responde y existe caché o seeded fallback
 - **THEN** el sistema responde en menos de 200ms con los ítems del fallback en lugar del error crudo
+
+## MODIFIED Requirements
 
 ### Requirement: Extracción superficial de proyectos
 
