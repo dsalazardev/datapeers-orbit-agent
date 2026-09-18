@@ -41,33 +41,27 @@ class ProjectCard(BaseModel):
     score: int = Field(ge=0, le=100)
 
 
-SYSTEM_PROMPT: str = """Eres un clasificador inmobiliario. Recibes una lista de candidatos extraídos \
-del HTML de un sitio de una constructora o inmobiliaria. Cada candidato tiene un índice (1..N), \
-un título, una URL y una fuente (meta/card/link).
+SYSTEM_PROMPT: str = """Eres un clasificador inmobiliario. Recibes una lista de candidatos extraídos del HTML de un sitio de una constructora o inmobiliaria (montón de páginas en vivo). Cada candidato tiene un índice (1..N), un título, una URL y una fuente (meta/card/link).
 
-Debes responder ÚNICAMENTE un array JSON válido, con exactamente un objeto por candidato, en el \
-mismo orden de los índices. NO agregues texto, ni markdown, ni explicaciones. El objeto de cada \
-candidato debe tener exactamente esta forma:
+Debes responder ÚNICAMENTE un objeto JSON válido con exactamente una CLAVE por candidato, siendo la clave su índice (1..N), en el mismo orden de los índices. NO agregues texto, ni markdown, ni explicaciones. Cada valor debe tener exactamente esta forma:
 
 {
-  "is_project": true|false,
-  "is_active_project": true|false,
-  "title": "título del proyecto tal como aparece en el HTML",
-  "description_summary": "resumen breve en español de una frase o null si no hay descripción",
-  "price_from": "valor numérico con unidades (ej. \"$520.000.000\" o \"$4.500 UF\") o null si el HTML no muestra precio",
-  "status_badge": "Preventa" | "Entrega Inmediata" | "Agotado" | "Desconocido",
-  "score": 0-100
+  "1": {
+    "is_project": true|false,
+    "is_active_project": true|false,
+    "title": "título del proyecto tal como aparece en el HTML",
+    "description_summary": "resumen breve en español de una frase o null si no hay descripción",
+    "price_from": "valor numérico con unidades (ej. \"$520.000.000\" o \"$4.500 UF\") o null si el HTML no muestra precio",
+    "status_badge": "Preventa" | "Entrega Inmediata" | "Agotado" | "Desconocido",
+    "score": 0-100
+  },
+  "2": { "...": "..." }
 }
 
 REGLAS:
-- "is_project" es true solo si la URL corresponde a un proyecto inmobiliario (apartamentos, casas, \
-torres, etapas, unidades). false para blogs, noticias, contactos, empleos, folletos, páginas legales \
-o cualquier contenido no inmobiliario.
-- "is_active_project" es true si el proyecto está comercializándose actualmente (en preventa, con \
-unidades disponibles o en entrega reciente); false si está agotado, terminado o descatalogado; usa \
-preferentemente "Desconocido" en el status cuando no haya señales claras.
-- "price_from": SOLO usa un precio si el HTML lo muestra explícitamente (sí escribe el número y la \
-unidad tal cual). Si el HTML NO muestra precio, escribe null. NUNCA inventes ni infierras precios.
+- "is_project" es true solo si la URL corresponde a un proyecto inmobiliario (apartamentos, casas, torres, etapas, unidades). false para blogs, noticias, contactos, empleos, folletos, páginas legales o cualquier contenido no inmobiliario.
+- "is_active_project" es true si el proyecto está comercializándose actualmente (en preventa, con unidades disponibles o en entrega reciente); false si está agotado, terminado o descatalogado; usa preferentemente "Desconocido" en el status cuando no haya señales claras.
+- "price_from": SOLO usa un precio si el HTML lo muestra explícitamente (sí escribe el número y la unidad tal cual). Si el HTML NO muestra precio, escribe null. NUNCA inventes ni infierras precios.
 - "status_badge": usa exactamente uno de los cuatro valores permitidos.
 - "score": tu confianza de que es un proyecto inmobiliario, de 0 (nada seguro) a 100 (totalmente seguro).
 - "description_summary": una frase breve en español o null.
@@ -77,11 +71,14 @@ RESPONDE SOLO EL JSON."""
 
 
 def _extract_json_payload(content: str) -> list[dict]:
-    """Robust extraction of the JSON array from a model answer (design D2).
+    """Robust extraction of the candidate cards from a model answer (D2).
 
-    Strips `` ```json `` fences when present, decodes the JSON and requires a
-    top-level list. Raises ``ValueError`` on any structural problem so callers
-    can fall back without propagating raw content.
+    Strips `` ```json `` fences when present and decodes the JSON. Supports two
+    shapes (aligned 1:1 with the input): a top-level JSON object keyed by the
+    candidate index ``{"1": {...}, "2": {...}}`` (the shape enforced by
+    ``response_format: json_object`` on the free-tier model), or a plain array.
+    Raises ``ValueError`` on any structural problem so callers can fall back
+    without propagating raw content.
     """
     text = content.strip()
     if text.startswith("```"):
@@ -93,15 +90,27 @@ def _extract_json_payload(content: str) -> list[dict]:
     elif text.startswith("`"):
         text = text.strip("`")
     payload = json.loads(text)
-    if not isinstance(payload, list):
-        raise ValueError("respuesta LLM no es un array")
-    return payload
+    if isinstance(payload, list):
+        return payload
+    if isinstance(payload, dict):
+        ordered: list[dict] = []
+        for key in sorted(payload, key=lambda k: int(k) if str(k).isdigit() else 0):
+            value = payload[key]
+            if isinstance(value, dict):
+                ordered.append(value)
+        return ordered
+    raise ValueError("respuesta LLM no es objeto ni array")
 
 
 def _align_cards(
     cards: list[ProjectCard], expected: int
 ) -> list[ProjectCard] | None:
-    """Return ``cards`` only when it validates and aligns 1:1 with candidates."""
+    """Return ``cards`` only when it validates and aligns 1:1 with candidates.
+
+    Both the index-keyed object and the array paths normalise to an ordered
+    list; a length mismatch (missing/extra/skipped keys) signals misalignment
+    and requests the deterministic fallback (D4).
+    """
     if len(cards) != expected:
         return None
     return cards
@@ -183,6 +192,8 @@ class LLMProjectClassifier:
         try:
             body = response.json()
             content = body["choices"][0]["message"]["content"]
+            if not content:
+                raise ValueError("respuesta LLM sin contenido")
             payload = _extract_json_payload(content)
             cards = [ProjectCard.model_validate(card) for card in payload]
         except (KeyError, ValueError, ValidationError):
@@ -207,7 +218,7 @@ class LLMProjectClassifier:
 
 def _build_batch_prompt(items: list[ProjectItem]) -> str:
     """Serialize the candidate batch as an indexed user message (D2)."""
-    lines = ["Clasifica cada candidato y devuelve el array JSON alineado:"]
+    lines = ["Clasifica cada candidato y devuelve el objeto JSON indexado 1..N:"]
     for index, item in enumerate(items, start=1):
         lines.append(f"{index}. {item.title} | fuente: {item.source}")
     return "\n".join(lines)
