@@ -1,0 +1,879 @@
+{
+  "by_site": {
+    "site_01": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Servicios",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      }
+    ],
+    "site_02": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Compramos tu lote",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "LO QUE NOS DIFERENCIA",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Ingeniería de valor",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Productividad",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Innovación y transformación digital",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Sostenibilidad",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Diseño integrado",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Infraestructura",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Construcción especializada",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Gerencia y estructuración",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      }
+    ],
+    "site_03": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "109",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Congreso Colombiano de la Construcción 2026",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Segunda Cumbre de IA Sector Constructor",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Construimos La Par",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Coordenada Urbana",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Webinar: Metodología y efectos de la actualización catastral - reducción de rezago",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Conexión BIM 2026 - 03 | BIM en subestaciones eléctricas",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Todos los cursos",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Pagos",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Todos los eventos",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      }
+    ],
+    "site_04": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Colombia - Lanzamientos 2026",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Antioquia",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Atlántico",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Bolívar",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Boyacá",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Cauca",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Cundinamarca",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Magdalena",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Quindio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de Vivienda en Risaralda",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      }
+    ],
+    "site_05": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Publica gratis",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Valora gratis",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Ir a la calculadora",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Regulación del alquiler temporal y por habitaciones. ¿Qué ha cambiado?",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "¿Qué necesitas para conseguir una hipoteca?",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "¿Cuál es el precio máximo que puedes pagar por una casa?",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "¿Qué necesito saber para alquilar una vivienda?",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "¿Qué tienes que preguntar al banco antes de firmar?",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "¿En qué hay que fijarse cuando se comparan hipotecas?",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Hipotecas",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      }
+    ],
+    "site_06": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "$ 1.100.000 Zona occidental, Bogotá 1 Baño 45 m² Apartaestudio en arriendo en restrepo, bogotá",
+        "description_summary": "Apartaestudio en arriendo en Restrepo, Bogotá.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "$ 4.366.000.000 Zona occidental, Bogotá 1231 m² Bodega en venta en pensilvania, bogotá",
+        "description_summary": "Bodega en venta en Pensilvania, Bogotá.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Desde $ 3.957.960.000 Casa en Pance, Cali, Valle del cauca 4 Habs. 5 Baños 374 m² Shalom, casa en venta en pance, cali",
+        "description_summary": "Casa en venta en Pance, Cali, con 4 habitaciones y 5 baños.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Desde $ 300.000.000 Casa en Ibagué, Tolima 2 Habs. 1 Baño 52 m² Bosques de las victorias, casa en venta en ibagué",
+        "description_summary": "Casa en venta en Ibagué, Tolima, con 2 habitaciones y 1 baño.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Proyectos de vivienda",
+        "description_summary": "Enlace a proyectos de vivienda.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 15
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Venta",
+        "description_summary": "Enlace a ventas.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Arriendo",
+        "description_summary": "Enlace a arriendos.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Ver todos los proyectos →",
+        "description_summary": "Enlace para ver todos los proyectos.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 15
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Apartamentos en Venta en Bogotá",
+        "description_summary": "Enlace a apartamentos en venta en Bogotá.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Apartamentos en Venta en Medellín",
+        "description_summary": "Enlace a apartamentos en venta en Medellín.",
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 10
+      }
+    ],
+    "site_07": [
+      {
+        "is_project": true,
+        "is_active_project": false,
+        "title": "San Carlos – Urbanización",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 65
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inicio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      }
+    ],
+    "site_08": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "El Campo Agroindustrial S.A.S. — Frutas deshidratadas",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      }
+    ],
+    "site_09": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Conozca más",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Inmobiliaria",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 5
+      }
+    ],
+    "site_10": [
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "BOLETINES",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Economía",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Indicadores Económicos",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Dólar",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Editorial",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "El dólar en Colombia ha subido más de $50 tras el aumento de la tasa de interés en los EE. UU.",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Nazly Carolina Morales Herrera",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Fintech 'jugará un papel protagónico' en el Gobierno, aseguró José Manuel Restrepo",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "La salud de la cartera entre los establecimientos de crédito sigue mejorando y se colocó en el 3,8% en julio",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      },
+      {
+        "is_project": false,
+        "is_active_project": false,
+        "title": "Holman Rodríguez Martínez",
+        "description_summary": null,
+        "price_from": null,
+        "status_badge": "Desconocido",
+        "score": 0
+      }
+    ]
+  }
+}

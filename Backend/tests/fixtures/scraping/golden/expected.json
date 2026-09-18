@@ -1,0 +1,689 @@
+{
+  "labels_by_site": {
+    "site_01": [
+      {
+        "title": "Servicios",
+        "url": "https://construccionesmarval.com/servicios",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_02": [
+      {
+        "title": "Compramos tu lote",
+        "url": "https://www.conconcreto.com/compramos-tu-lote/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "LO QUE NOS DIFERENCIA",
+        "url": "https://www.conconcreto.com/lo-que-nos-diferencia/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Ingeniería de valor",
+        "url": "https://www.conconcreto.com/lo-que-nos-diferencia/#ingenieria-valor",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Productividad",
+        "url": "https://www.conconcreto.com/lo-que-nos-diferencia/#productividad",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Innovación y transformación digital",
+        "url": "https://www.conconcreto.com/innovacion-y-transformacion-digital/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Sostenibilidad",
+        "url": "https://www.conconcreto.com/sostenibilidad",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Diseño integrado",
+        "url": "https://www.conconcreto.com/ingenieria-y-diseno/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Infraestructura",
+        "url": "https://www.conconcreto.com/infraestructuras",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Construcción especializada",
+        "url": "https://www.conconcreto.com/servicios-de-construccion/#construccion",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Gerencia y estructuración",
+        "url": "https://www.conconcreto.com/servicios-de-construccion/#estructuracion",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_03": [
+      {
+        "title": "109",
+        "url": "https://www.camacol.co/actualidad/publicaciones/revista-urbana/109",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Congreso Colombiano de la Construcción 2026",
+        "url": "https://www.camacol.co/eventos/congreso-colombiano-de-la-construccion-2026",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Segunda Cumbre de IA Sector Constructor",
+        "url": "https://www.camacol.co/eventos/segunda-cumbre-de-ia-sector-constructor",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Construimos La Par",
+        "url": "https://www.camacol.co/productividad-sectorial/equidad-de-genero/construimos-la-par",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Coordenada Urbana",
+        "url": "https://www.camacol.co/informacion-economica/coordenada-urbana",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Webinar: Metodología y efectos de la actualización catastral - reducción de rezago",
+        "url": "https://www.camacol.co/productividad-sectorial/formacion/juridica/webinar-metodologia-y-efectos-de-la-actualizacion",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Conexión BIM 2026 - 03 | BIM en subestaciones eléctricas",
+        "url": "https://www.camacol.co/productividad-sectorial/formacion/conexion-bim/conexion-bim-2026-03-bim-en-subestaciones-electricas",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Todos los cursos",
+        "url": "https://www.camacol.co/productividad-sectorial/formacion",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Pagos",
+        "url": "https://www.camacol.co/pagos-en-linea",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Todos los eventos",
+        "url": "https://www.camacol.co/eventos",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_04": [
+      {
+        "title": "Proyectos de Vivienda en Colombia - Lanzamientos 2026",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/",
+        "source": "meta",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Antioquia",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-antioquia/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Atlántico",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-atlantico/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Bolívar",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-bolivar/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Boyacá",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-boyaca/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Cauca",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-cauca/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Cundinamarca",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-cundinamarca/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Magdalena",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-magdalena/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Quindio",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-quindio/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Proyectos de Vivienda en Risaralda",
+        "url": "https://www.metrocuadrado.com/proyectos-vivienda/dep-risaralda/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_05": [
+      {
+        "title": "Publica gratis",
+        "url": "https://www.pisos.com/publicar-anuncio",
+        "source": "card",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Valora gratis",
+        "url": "https://www.pisos.com/valoracion-inmueble",
+        "source": "card",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Ir a la calculadora",
+        "url": "https://www.pisos.com/Hipotecas/",
+        "source": "card",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Regulación del alquiler temporal y por habitaciones. ¿Qué ha cambiado?",
+        "url": "https://www.pisos.com/aldia/cataluna-regula-el-alquiler-temporal-y-por-habitaciones-que-ha-cambiado/1664663/",
+        "source": "card",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "¿Qué necesitas para conseguir una hipoteca?",
+        "url": "https://www.pisos.com/aldia/todo-lo-que-necesitas-para-conseguir-una-hipoteca/1658815/",
+        "source": "card",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "¿Cuál es el precio máximo que puedes pagar por una casa?",
+        "url": "https://www.pisos.com/aldia/que-casa-puedes-permitirte-segun-tus-ingresos/1659110/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "¿Qué necesito saber para alquilar una vivienda?",
+        "url": "https://www.pisos.com/aldia/todo-lo-que-necesitas-saber-para-alquilar-una-vivienda/1658813/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "¿Qué tienes que preguntar al banco antes de firmar?",
+        "url": "https://www.pisos.com/aldia/todo-lo-que-tienes-que-preguntar-al-banco-antes-de-firmar/1658819/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "¿En qué hay que fijarse cuando se comparan hipotecas?",
+        "url": "https://www.pisos.com/aldia/descubre-en-que-fijarte-cuando-compares-hipotecas/1658817/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Hipotecas",
+        "url": "https://www.pisos.com/hipotecas/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_06": [
+      {
+        "title": "$ 1.100.000 Zona occidental, Bogotá 1 Baño 45 m² Apartaestudio en arriendo en restrepo, bogotá",
+        "url": "https://www.fincaraiz.com.co/apartaestudio-en-arriendo-en-restrepo-bogota/194275040",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "$ 4.366.000.000 Zona occidental, Bogotá 1231 m² Bodega en venta en pensilvania, bogotá",
+        "url": "https://www.fincaraiz.com.co/bodega-en-venta-en-pensilvania-bogota/194275029",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Desde $ 3.957.960.000 Casa en Pance, Cali, Valle del cauca 4 Habs. 5 Baños 374 m² Shalom, casa en venta en pance, cali",
+        "url": "https://www.fincaraiz.com.co/proyectos-vivienda/shalom-casas-en-venta-en-pance-cali/15018820",
+        "source": "link",
+        "is_project": true,
+        "price_from": "$ 3.957.960.000"
+      },
+      {
+        "title": "Desde $ 300.000.000 Casa en Ibagué, Tolima 2 Habs. 1 Baño 52 m² Bosques de las victorias, casa en venta en ibagué",
+        "url": "https://www.fincaraiz.com.co/proyectos-vivienda/bosques-de-las-victorias-casas-en-venta-en-ibague/15018813",
+        "source": "link",
+        "is_project": true,
+        "price_from": "$ 300.000.000"
+      },
+      {
+        "title": "Proyectos de vivienda",
+        "url": "https://www.fincaraiz.com.co/proyectos-vivienda",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Venta",
+        "url": "https://www.fincaraiz.com.co/venta",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Arriendo",
+        "url": "https://www.fincaraiz.com.co/arriendo",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Ver todos los proyectos →",
+        "url": "https://www.fincaraiz.com.co/proyectos-vivienda/vivienda-vis",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Apartamentos en Venta en Bogotá",
+        "url": "https://www.fincaraiz.com.co/venta/apartamentos/bogota/bogota-dc",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Apartamentos en Venta en Medellín",
+        "url": "https://www.fincaraiz.com.co/venta/apartamentos/medellin/antioquia",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_07": [
+      {
+        "title": "San Carlos – Urbanización",
+        "url": "https://www.sancarlos.com.co/",
+        "source": "meta",
+        "is_project": true,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inicio",
+        "url": "https://sancarlos.com.co/",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_08": [
+      {
+        "title": "El Campo Agroindustrial S.A.S. — Frutas deshidratadas",
+        "url": "https://www.elcampo.com.co/",
+        "source": "meta",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_09": [
+      {
+        "title": "Conozca más",
+        "url": "https://www.inmobiliaria.net/cookies",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Inmobiliaria",
+        "url": "https://www.inmobiliaria.net/pack/inmobiliaria",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ],
+    "site_10": [
+      {
+        "title": "BOLETINES",
+        "url": "https://www.portafolio.co/zona-usuario/boletines",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Economía",
+        "url": "https://www.portafolio.co/economia",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Indicadores Económicos",
+        "url": "https://www.portafolio.co/indicadores-economicos",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Dólar",
+        "url": "https://www.portafolio.co/indicadores-economicos/dolar",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Editorial",
+        "url": "https://www.portafolio.co/opinion/editorial",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "El dólar en Colombia ha subido más de $50 tras el aumento de la tasa de interés en los EE. UU.",
+        "url": "https://www.portafolio.co/economia/finanzas/precio-del-dolar-hoy-en-colombia-asi-cotiza-la-divisa-este-17-de-septiembre-502722",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Nazly Carolina Morales Herrera",
+        "url": "https://www.portafolio.co/autor/nazly-carolina-morales-herrera",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Fintech 'jugará un papel protagónico' en el Gobierno, aseguró José Manuel Restrepo",
+        "url": "https://www.portafolio.co/economia/gobierno/fintech-jugara-un-papel-protagonico-en-el-gobierno-aseguro-jose-manuel-restrepo-502790",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "La salud de la cartera entre los establecimientos de crédito sigue mejorando y se colocó en el 3,8% en julio",
+        "url": "https://www.portafolio.co/economia/finanzas/la-salud-de-la-cartera-entre-los-establecimientos-de-credito-sigue-mejorando-y-se-coloco-en-el-3-8-en-julio-502788",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      },
+      {
+        "title": "Holman Rodríguez Martínez",
+        "url": "https://www.portafolio.co/autor/holman-rodriguez-martinez",
+        "source": "link",
+        "is_project": false,
+        "price_from": null
+      }
+    ]
+  }
+}

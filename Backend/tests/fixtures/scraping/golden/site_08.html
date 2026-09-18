@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>El Campo Agroindustrial S.A.S. — Frutas deshidratadas</title>
+  <meta name="description" content="Frutas deshidratadas de Colombia, en rodajas y trozos para snacks, infusiones y preparaciones." />
+  <style>
+    :root{
+      --bg:#0f1216; --card:#171b21; --soft:#232a33; --brand:#7cc86f; --brand2:#f2b705; --text:#e8eef6; --muted:#9fb0c2;
+      --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:linear-gradient(180deg,#0d1116 0%,#121821 40%,#0f1216 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;background:rgba(15,18,22,.7);backdrop-filter: blur(8px);border-bottom:1px solid #1f2630;z-index:20}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-img{height:48px;width:auto;border-radius:8px}
+    .brand h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
+    .lang{display:flex;gap:8px}
+    .lang button{background:var(--soft);border:1px solid #2a333f;color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .lang button.active{border-color:var(--brand);box-shadow:0 0 0 2px rgba(124,200,111,.15) inset}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{background:var(--brand);color:#0b120a;border:none;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer}
+    .btn.alt{background:transparent;border:1px solid #2a333f;color:var(--text)}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;padding:40px 0}
+    .hero-card{background:linear-gradient(160deg,#171c23, #121821);border:1px solid #232c36;border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+    .hero h2{font-size:36px;margin:0 0 10px;line-height:1.15}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .badge{display:inline-block;padding:6px 10px;border:1px dashed #2d3845;border-radius:999px;font-size:12px;color:#cfe7d0;margin-bottom:10px}
+    .stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+    .chip{background:#131922;border:1px solid #243041;border-radius:999px;padding:8px 12px;font-size:12px}
+    .preview{background:conic-gradient(from 140deg, #10161f, #141b25 40%, #0e141c);border:1px solid #232c36;border-radius:var(--radius);min-height:240px;display:grid;place-items:center;position:relative;overflow:hidden}
+    .preview::after{content:"";position:absolute;inset:auto 12px 12px auto;font-weight:700;color:#1f2937;letter-spacing:3px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .section{padding:20px 0}
+    .section h3{margin:0 0 10px;font-size:26px}
+    .section p.lead{margin:0 0 18px;color:var(--muted)}
+    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid #232c36;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .pill{margin:8px 12px 0;display:inline-block;background:#10161f;border:1px solid #2a333f;color:#cfe7d0;padding:6px 10px;border-radius:999px;font-size:12px}
+    .card h4{font-size:16px;margin:8px 12px 0}
+    .card p{font-size:13px;color:var(--muted);margin:6px 12px 12px}
+    .card .row{display:flex;gap:10px;padding:0 12px 14px}
+    .mini{flex:1;background:#0d1116; border:1px solid #273140;border-radius:12px;padding:10px}
+    .mini b{display:block;font-size:12px;margin-bottom:6px}
+    .mini span{font-size:12px;color:var(--muted)}
+    .blog{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .blog .post{background:var(--card);border:1px solid #232c36;border-radius:16px;overflow:hidden}
+    .post .cover{aspect-ratio:16/9;background:#0d1116 url('img/placeholder-blog.jpg') center/cover no-repeat;border-bottom:1px solid #232c36}
+    .post .body{padding:14px}
+    .post h4{margin:0 0 8px}
+    .post p{margin:0;color:var(--muted);font-size:14px}
+    .list{display:flex;gap:10px;flex-wrap:wrap}
+    footer{border-top:1px solid #1f2630;margin-top:30px}
+    .foot{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;padding:24px 0}
+    .foot small{color:var(--muted)}
+    .whatsapp{
+      position:fixed;right:16px;bottom:16px;background:#25D366;color:white;border:none;
+      width:58px;height:58px;border-radius:50%;display:grid;place-items:center;
+      font-weight:900;box-shadow:0 10px 25px rgba(0,0,0,.35);z-index:50
+    }
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+    .filters button{background:#121821;border:1px solid #2a333f;color:#cfe7d0;padding:8px 12px;border-radius:999px;cursor:pointer}
+    .filters button.active{border-color:var(--brand2);box-shadow:0 0 0 2px rgba(242,183,5,.12) inset}
+    .search{width:100%;background:#121821;border:1px solid #2a333f;border-radius:12px;padding:12px;color:var(--text);outline:none}
+    /* Slider por tarjeta */
+    .slider{ position:relative;width:100%;aspect-ratio:1.25/1;background:#0d1116;border-bottom:1px solid #232c36;overflow:hidden }
+    .slider img{ position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease;background:#0d1116 }
+    .slider img.active{opacity:1}
+    .dots{ position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:8px;z-index:2 }
+    .dot{ width:8px;height:8px;border-radius:50%;background:#ffffff33;border:1px solid #ffffff55;cursor:pointer }
+    .dot.active{ background:#fff }
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.preview{min-height:180px}}
+    .slider-hero{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:14px;
+  overflow:hidden;
+}
+.slider-hero img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity .6s ease;
+}
+.slider-hero img.active{ opacity:1; }
+.slider-hero .dots{
+  position:absolute; left:0; right:0; bottom:12px;
+  display:flex; justify-content:center; gap:8px;
+}
+.slider-hero .dot{
+  width:10px; height:10px; border-radius:50%;
+  background:#ffffff55; border:1px solid #fff; cursor:pointer;
+}
+.slider-hero .dot.active{ background:#fff; }
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <img src="img/logo.png" alt="El Campo Agroindustrial S.A.S." class="logo-img">
+      <h1 data-i18n="brand">Conserva la esencia.</h1>
+    </div>
+    <div class="cta">
+      <div class="lang">
+        <button id="btnES" class="active">ES</button>
+        <button id="btnEN">EN</button>
+      </div>
+      <a href="#contacto" class="btn" data-i18n="ctaQuote">Cotizar</a>
+      <a href="#productos" class="btn alt" data-i18n="ctaProducts">Productos</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- HERO -->
+ <!-- HERO -->
+<section class="hero">
+
+    <div class="hero-card">
+
+        <span class="badge">
+            FABRICACIÓN POR CONTRATO
+        </span>
+
+        <h2>
+            Servicio de <br>
+            <span style="color:#7cc86f;">Maquila de Frutas Deshidratadas</span>
+        </h2>
+
+        <p style="font-size:18px;">
+            Transformamos su fruta fresca en un producto listo para el mercado.
+            Procesamos frutas para empresas, supermercados, exportadores,
+            distribuidores y marcas privadas.
+        </p>
+
+        <div class="stats">
+
+            <span class="chip">
+                ✓ Usted suministra la fruta
+            </span>
+
+            <span class="chip">
+                ✓ Producción industrial
+            </span>
+
+            <span class="chip">
+                ✓ Trazabilidad por lotes
+            </span>
+
+            <span class="chip">
+                ✓ Empaque personalizado
+            </span>
+
+            <span class="chip">
+                ✓ Calidad uniforme
+            </span>
+
+            <span class="chip">
+                ✓ Cumplimiento de tiempos
+            </span>
+
+        </div>
+
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+
+            <a href="#contacto" class="btn">
+                Solicitar cotización
+            </a>
+
+            <a href="#proceso" class="btn alt">
+                Conocer el proceso
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="preview slider-hero">
+
+        <img src="img/maquila-1.jpg" class="active">
+        <img src="img/maquila-2.jpg">
+        <img src="img/maquila-3.jpg">
+
+        <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+    </div>
+
+</section>
+  <!-- USOS -->
+  <section class="section" id="usos">
+    <h3 data-i18n="hUses">¿Cómo disfrutarlas?</h3>
+    <p class="lead" data-i18n="pUses">Ideal como snack directo, para infusiones naturales, toppings de bowls, repostería, coctelería, y mezclas con granolas o yogur.</p>
+    <div class="list">
+      <span class="chip" data-i18n="u1">Snack saludable</span>
+      <span class="chip" data-i18n="u2">Infusiones</span>
+      <span class="chip" data-i18n="u3">Toppings & repostería</span>
+      <span class="chip" data-i18n="u4">Coctelería</span>
+      <span class="chip" data-i18n="u5">Foodservice</span>
+    </div>
+  </section>
+
+  <!-- FILTROS + BUSCADOR + CARDS -->
+  <section class="section" id="productos">
+    <h3 data-i18n="hCatalog">Catálogo de productos</h3>
+    <p class="lead" data-i18n="pCatalog">Disponibles en presentaciones de <b>rodajas</b> y <b>trozos</b>. Banano en <b>moneditas</b>.</p>
+
+    <div class="filters">
+      <button class="active" data-filter="all" data-i18n="fAll">Todo</button>
+      <button data-filter="rodajas" data-i18n="fSlices">Rodajas</button>
+      <button data-filter="trozos" data-i18n="fChunks">Trozos</button>
+    </div>
+    <input id="search" class="search" type="search" placeholder="Buscar fruta..." data-i18n-placeholder="searchPH">
+
+    <div id="cards" class="cards" style="margin-top:14px"></div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="section" id="proceso">
+    <h3 data-i18n="hProcess">Nuestro proceso</h3>
+    <div class="grid">
+      <div class="card" style="grid-column:span 4;">
+        <div class="slider" aria-label="Selección y lavado">
+          <img src="img/proceso-seleccion.jpg" alt="Selección y lavado" class="active">
+          <div class="dots"><span class="dot active"></span></div>
+        </div>
+        <h4 data-i18n="pr1t">Selección & lavado</h4>
+        <p data-i18n="pr1p">Elegimos fruta madura y de proveedores confiables. Lavado y desinfección controlados.</p>
+      </div>
+      <div class="card" style="grid-column:span 4;">
+        <div class="slider" aria-label="Corte uniforme">
+          <img src="img/proceso-corte.jpg" alt="Corte uniforme" class="active">
+          <div class="dots"><span class="dot active"></span></div>
+        </div>
+        <h4 data-i18n="pr2t">Corte uniforme</h4>
+        <p data-i18n="pr2p">Corte en rodajas, trozos o moneditas (banano) para consistencia y rendimiento.</p>
+      </div>
+      <div class="card" style="grid-column:span 4;">
+        <div class="slider" aria-label="Deshidratado">
+          <img src="img/proceso-deshidratado.jpg" alt="Deshidratado" class="active">
+          <div class="dots"><span class="dot active"></span></div>
+        </div>
+        <h4 data-i18n="pr3t">Secado</h4>
+        <p data-i18n="pr3p">Curvas de temperatura/tiempo que preservan sabor, color y nutrientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG DUMMY -->
+<section class="section" id="blog">
+  <h3 data-i18n="hBlog">Blog</h3>
+  <p class="lead" data-i18n="pBlog">Notas rápidas sobre tendencias, recetas y tips de almacenamiento.</p>
+  <div class="blog">
+    <article class="post">
+      <div class="cover" style="background-image:url('img/blog-cafe-5-ideas.jpg')"></div>
+      <div class="body">
+        <h4 data-i18n="b1t">5 ideas para usar fruta deshidratada en tu café</h4>
+        <p data-i18n="b1p">Desde toppings para capuchinos hasta siropes caseros con infusión de naranja deshidratada.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="cover" style="background-image:url('img/blog-snack-oficina.jpg')"></div>
+      <div class="body">
+        <h4 data-i18n="b2t">Snack inteligente para oficina</h4>
+        <p data-i18n="b2p">Cómo reemplazar dulces procesados por mezclas de manzana, coco y mango deshidratados.</p>
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="cover" style="background-image:url('img/blog-infusiones-caracter.jpg')"></div>
+      <div class="body">
+        <h4 data-i18n="b3t">Infusiones con carácter</h4>
+        <p data-i18n="b3p">Uchuva y toronja deshidratadas para infusiones aromáticas y refrescantes.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+  <!-- CONTACTO -->
+  <section class="section" id="contacto">
+    <h3 data-i18n="hContact">Contacto</h3>
+    <p class="lead" data-i18n="pContact">¿Mayoristas, retail o marca propia? Escríbenos por WhatsApp y te asesoramos.</p>
+    <div class="list">
+      <a class="btn" id="waMain" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn alt" href="mailto:ventas@elcampo.com.co">ventas@elcampo.com.co</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <small>© <span id="y"></span> <span data-i18n="brand">El Campo Agroindustrial S.A.S.</span>. <span data-i18n="rights">Todos los derechos reservados.</span></small>
+    <div style="text-align:right"><small><a href="#productos" data-i18n="backTop">Volver arriba</a></small></div>
+  </div>
+</footer>
+
+<!-- Botón flotante WhatsApp -->
+<a class="whatsapp" id="waFloat" target="_blank" aria-label="Hablar por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M12 0C5.371 0 0 5.371 0 12c0 2.119.555 4.119 1.604 5.902L0 24l6.262-1.584C8.09 23.445 10.02 24 12 24c6.629 0 12-5.371 12-12S18.629 0 12 0zm0 21.82c-1.797 0-3.555-.48-5.086-1.387l-.363-.215-3.715.939.994-3.621-.238-.371A9.755 9.755 0 0 1 2.245 12c0-5.379 4.375-9.755 9.755-9.755S21.755 6.621 21.755 12 17.379 21.82 12 21.82zm5.414-7.395c-.293-.146-1.73-.855-1.996-.949s-.465-.146-.66.146c-.195.293-.758.949-.93 1.145-.171.195-.342.219-.635.073-.293-.146-1.236-.455-2.354-1.449-.87-.775-1.457-1.73-1.628-2.023-.171-.293-.018-.451.128-.596.131-.131.293-.342.439-.512.146-.171.195-.293.293-.488.098-.195.049-.366-.024-.512-.073-.146-.66-1.59-.902-2.174-.24-.576-.484-.498-.66-.508-.171-.007-.366-.009-.561-.009s-.512.073-.781.366c-.268.293-1.025 1.001-1.025 2.439s1.049 2.834 1.195 3.027c.146.195 2.07 3.164 5.016 4.434.701.303 1.25.482 1.678.617.705.225 1.348.193 1.857.117.566-.084 1.73-.707 1.973-1.391.244-.684.244-1.27.171-1.391-.073-.122-.268-.195-.561-.342z"/>
+  </svg>
+</a>
+
+
+<script>
+  // === Configuración WhatsApp e i18n ===
+  const WHATSAPP_NUMBER = "573216478535";
+  const WHATSAPP_MSG_ES = "Hola, quiero cotizar frutas deshidratadas Colombianas.";
+  const WHATSAPP_MSG_EN = "Hi! I’d like a quote for dehydrated Colombian fruits.";
+
+  const i18n = {
+    es: { brand:"El Campo Agroindustrial S.A.S.", ctaQuote:"Cotizar", ctaProducts:"Productos",
+      badge:"Fruta 100% natural", hHero:"Frutas deshidratadas Colombianas para snacks, infusiones y preparaciones",
+      pHero:"Deshidratamos en rodajas y en trozos: calidad constante, sabor intenso y vida útil extendida.",
+      s1:"Sin azúcar añadida", s2:"Lotes trazables", s3:"Empaque listo retail/foodservice",
+      seeGrid:"Ver catálogo", seeBlog:"Ver blog", hUses:"¿Cómo disfrutarlas?",
+      pUses:"Ideal como snack directo, para infusiones naturales, toppings de bowls, repostería, coctelería, y mezclas con granolas o yogur.",
+      u1:"Snack saludable", u2:"Infusiones", u3:"Toppings & repostería", u4:"Coctelería", u5:"Foodservice",
+      hCatalog:"Catálogo de productos", pCatalog:"Disponibles en presentaciones de <b>rodajas</b> y <b>trozos</b>. Somos fábrica, podemos ajustar el producto según sus necesidades particulares.",
+      fAll:"Todo", fSlices:"Rodajas", fChunks:"Trozos", searchPH:"Buscar fruta...",
+      hProcess:"Nuestro proceso", pr1t:"Selección & lavado", pr1p:"Elegimos fruta madura y de proveedores confiables. Lavado y desinfección controlados.",
+      pr2t:"Corte uniforme", pr2p:"Corte en rodajas, trozos o moneditas para consistencia y rendimiento.",
+      pr3t:"Deshidratado", pr3p:"Curvas de temperatura/tiempo que preservan sabor, color y nutrientes.",
+      hBlog:"Blog", pBlog:"Notas rápidas sobre tendencias, recetas y tips de almacenamiento.",
+      b1t:"5 ideas para usar fruta deshidratada en tu café", b1p:"Desde toppings para capuchinos hasta siropes caseros con infusión de naranja deshidratada.",
+      b2t:"Snack inteligente para oficina", b2p:"Cómo reemplazar dulces procesados por mezclas de manzana, coco y mango deshidratados.",
+      b3t:"Infusiones con carácter", b3p:"Uchuva y toronja deshidratadas para infusiones aromáticas y refrescantes.",
+      hContact:"Contacto", pContact:"¿Mayoristas, retail o marca propia? Escríbenos por WhatsApp y te asesoramos.",
+      rights:"Todos los derechos reservados.", backTop:"Volver arriba",
+      labelSlices:"Rodajas", labelChunks:"Trozos"
+    },
+    en: { brand:"El Campo Agroindustrial S.A.S.", ctaQuote:"Get a Quote", ctaProducts:"Products",
+      badge:"100% Natural Fruit", hHero:"Dehydrated Colombian fruits for snacks, infusions & recipes",
+      pHero:"We dehydrate in slices and chunks: consistent quality, bold flavor and extended shelf life.",
+      s1:"No added sugar", s2:"Traceable batches", s3:"Retail/Foodservice ready",
+      seeGrid:"View catalog", seeBlog:"Read blog", hUses:"How to enjoy them?",
+      pUses:"Perfect as a direct snack, natural infusions, bowl toppings, baking, mixology, and blends with granola or yogurt.",
+      u1:"Healthy snack", u2:"Infusions", u3:"Toppings & baking", u4:"Mixology", u5:"Foodservice",
+      hCatalog:"Product catalog", pCatalog:"Available in <b>slices, chunks</b> and <b>coin slices</b>.",
+      fAll:"All", fSlices:"Slices", fChunks:"Chunks", searchPH:"Search fruit...",
+      hProcess:"Our process", pr1t:"Selection & washing", pr1p:"We choose ripe fruit from trusted suppliers. Controlled washing & sanitizing.",
+      pr2t:"Uniform cutting", pr2p:"Cut into slices, chunks or coin slices (banana) for consistency and yield.",
+      pr3t:"Dehydration", pr3p:"Time/temperature curves preserving flavor, color and nutrients.",
+      hBlog:"Blog", pBlog:"Quick notes on trends, recipes and storage tips.",
+      b1t:"5 ways to use dehydrated fruit in coffee", b1p:"From cappuccino toppings to homemade syrups infused with dehydrated orange.",
+      b2t:"Smart office snack", b2p:"Swap candy for blends of dehydrated apple, coconut and mango.",
+      b3t:"Infusions with character", b3p:"Physalis and grapefruit for aromatic, refreshing infusions.",
+      hContact:"Contact", pContact:"Wholesale, retail or private label? Message us on WhatsApp.",
+      rights:"All rights reserved.", backTop:"Back to top",
+      labelSlices:"Slices", labelChunks:"Chunks"
+    }
+  };
+
+  // === Helpers ===
+  const $ = (s, c=document)=>c.querySelector(s);
+  const $$ = (s, c=document)=>[...c.querySelectorAll(s)];
+  $("#y").textContent = new Date().getFullYear();
+
+  let currentLang = "es";
+  function setWhatsAppLinks(){
+    const msg = (currentLang==="es") ? WHATSAPP_MSG_ES : WHATSAPP_MSG_EN;
+    $("#waMain").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    $("#waFloat").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  }
+  function applyLang(lang){
+    currentLang = lang;
+    const dict = i18n[lang];
+    $$("[data-i18n]").forEach(el=>{
+      const key = el.getAttribute("data-i18n");
+      if(dict[key]) el.innerHTML = dict[key];
+    });
+    $$("[data-i18n-placeholder]").forEach(el=>{
+      const key = el.getAttribute("data-i18n-placeholder");
+      if(dict[key]) el.setAttribute("placeholder", dict[key]);
+    });
+    setWhatsAppLinks();
+  }
+
+  // === Productos (definir ANTES de renderizar) ===
+  const productosBase = [
+    { nombreES:"Manzana verde", nombreEN:"Green apple", slug:"manzana-verde" },
+    { nombreES:"Manzana roja",  nombreEN:"Red apple",   slug:"manzana-roja" },
+    { nombreES:"Uchuva",        nombreEN:"Physalis",    slug:"uchuva" },
+    { nombreES:"Fresa",         nombreEN:"Strawberry",  slug:"fresa" },
+    { nombreES:"Coco",          nombreEN:"Coconut",     slug:"coco" },
+    { nombreES:"Piña",          nombreEN:"Pineapple",   slug:"pina" },
+    { nombreES:"Papaya",        nombreEN:"Papaya",      slug:"papaya" },
+    { nombreES:"Mango",         nombreEN:"Mango",       slug:"mango" },
+    { nombreES:"Banano",        nombreEN:"Banana",      slug:"banano" },
+    { nombreES:"Tomate",        nombreEN:"Tomato",      slug:"tomate" },
+    { nombreES:"Limón",         nombreEN:"Lemon",       slug:"limon" },
+    { nombreES:"Naranja",       nombreEN:"Orange",      slug:"naranja" },
+    { nombreES:"Toronja",       nombreEN:"Grapefruit",  slug:"toronja" },
+    { nombreES:"Mora",          nombreEN:"Blackberry",  slug:"mora" },
+    { nombreES:"Carambolo",     nombreEN:"Starfruit",   slug:"carambolo" },
+  ];
+
+  const productos = productosBase.flatMap(item=>[
+    {
+      ...item,
+      presentacion:"rodajas",
+      descripcionES: item.slug==="banano"
+        ? "Moneditas crujientes, ideales para snacking y granolas."
+        : "Rodajas homogéneas con textura agradable y sabor concentrado.",
+      descripcionEN: item.slug==="banano"
+        ? "Crispy coin slices, perfect for snacking and granola mixes."
+        : "Uniform slices with pleasant texture and concentrated flavor.",
+      imagen:`img/${item.slug}-rodajas.jpg`,
+    },
+    {
+      ...item,
+      presentacion:"trozos",
+      descripcionES:"Trozos versátiles para repostería, mezclas y toppings.",
+      descripcionEN:"Versatile chunks for baking, blends and toppings.",
+      imagen:`img/${item.slug}-trozos.jpg`,
+    },
+  ]);
+// === Excluir presentaciones específicas (edita esta lista) ===
+// Ejemplo: quitar TROZOS de mango, piña y naranja
+const EXC_PRESENT = [
+  { slug: "limon",   presentacion: "trozos" },
+  { slug: "toronja",    presentacion: "trozos" },
+  { slug: "naranja", presentacion: "trozos" },
+    { slug: "banano", presentacion: "trozos" },
+      { slug: "carambolo", presentacion: "trozos" },
+        { slug: "mora", presentacion: "trozos" },
+          { slug: "tomate", presentacion: "trozos" },
+            { slug: "coco", presentacion: "trozos" },
+              { slug: "papaya", presentacion: "trozos" },
+                { slug: "fresa", presentacion: "trozos" },
+                  { slug: "uchuva", presentacion: "trozos" },
+                    { slug: "manzana-roja", presentacion: "trozos" },
+                      { slug: "manzana-roja", presentacion: "rodajas" },
+  // { slug: "limon", presentacion: "trozos" }, // <- agrega o quita aquí
+];
+
+// Aplica el filtro
+const productosFiltrados = productos.filter(p =>
+  !EXC_PRESENT.some(e =>
+    e.slug === p.slug &&
+    (!e.presentacion || e.presentacion === p.presentacion)
+  )
+);
+
+  // === Render de tarjetas con carrusel ===
+  const cards = $("#cards");
+
+  function buildGalleryPaths(p){
+    const base = p.imagen;
+    const second = p.imagen.replace(".jpg","-2.jpg");
+    const third  = p.imagen.replace(".jpg","-3.jpg");
+    return [base, second, third];
+  }
+  function preloadValid(src){
+    return new Promise(resolve=>{
+      const img = new Image();
+      img.onload = ()=>resolve(src);
+      img.onerror = ()=>resolve(null);
+      img.src = src;
+    });
+  }
+  async function createSlider(elContainer, paths, altText){
+    const slider = document.createElement("div");
+    slider.className = "slider";
+    const dots = document.createElement("div");
+    dots.className = "dots";
+
+    const results = await Promise.all(paths.map(preloadValid));
+    const valids = results.filter(Boolean);
+    if(valids.length===0){
+      const img = document.createElement("img");
+      img.src = "img/placeholder.jpg";   // asegúrate de tener este archivo en /img
+      img.alt = altText;
+      img.className = "active";
+      slider.appendChild(img);
+      const d = document.createElement("span"); d.className="dot active"; dots.appendChild(d);
+    } else {
+      valids.forEach((src, idx)=>{
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = altText;
+        if(idx===0) img.classList.add("active");
+        slider.appendChild(img);
+
+        const dot = document.createElement("span");
+        dot.className = "dot" + (idx===0?" active":"");
+        dot.addEventListener("click", ()=>{
+          $$(".slider img", slider).forEach(i=>i.classList.remove("active"));
+          $$(".dot", dots).forEach(d=>d.classList.remove("active"));
+          img.classList.add("active");
+          dot.classList.add("active");
+        });
+        dots.appendChild(dot);
+      });
+    }
+    slider.appendChild(dots);
+    elContainer.prepend(slider);
+  }
+
+  async function renderCards(list){
+    cards.innerHTML = "";
+    for(const p of list){
+      const name = currentLang==="es" ? p.nombreES : p.nombreEN;
+      const desc = currentLang==="es" ? p.descripcionES : p.descripcionEN;
+      const presentLabel = p.presentacion==="rodajas" ? i18n[currentLang].labelSlices : i18n[currentLang].labelChunks;
+
+      const el = document.createElement("article");
+      el.className = "card";
+      el.setAttribute("data-kind", p.presentacion);
+      el.innerHTML = `
+        <span class="pill">${name}</span>
+        <h4>${presentLabel}</h4>
+        <p>${desc}</p>
+        <div class="row">
+          <div class="mini">
+            <b>${currentLang==="es"?"Usos":"Uses"}</b>
+            <span>${currentLang==="es"?"Snack, infusiones, toppings":"Snack, infusions, toppings"}</span>
+          </div>
+          <div class="mini">
+            <b>${currentLang==="es"?"Presentación":"Pack"}</b>
+            <span>100g · 250g · 1kg</span>
+          </div>
+        </div>
+      `;
+      cards.appendChild(el);
+
+      const paths = buildGalleryPaths(p);
+      await createSlider(el, paths, `${name} ${presentLabel}`);
+    }
+  }
+
+  // === Filtros y búsqueda ===
+  const filterBtns = $$(".filters button");
+  function applyFilter(kind){
+    filterBtns.forEach(b=>b.classList.toggle("active", b.dataset.filter===kind));
+    $$(".card", cards).forEach(card=>{
+      card.style.display = (kind==="all" || card.dataset.kind===kind) ? "" : "none";
+    });
+  }
+  filterBtns.forEach(btn=>btn.addEventListener("click",()=>applyFilter(btn.dataset.filter)));
+
+  $("#search").addEventListener("input", (e)=>{
+    const q = e.target.value.trim().toLowerCase();
+    $$(".card", cards).forEach((card)=>{
+      const name = card.querySelector(".pill")?.textContent.toLowerCase() || "";
+      const kind = card.getAttribute("data-kind") || "";
+      const hit = name.includes(q) || kind.includes(q);
+      card.style.display = hit ? "" : "none";
+    });
+  });
+
+  // === Listeners de idioma (re-render conservando filtro) ===
+function rerenderKeepingFilter(){
+  const active = $(".filters button.active")?.dataset.filter || "all";
+  renderCards(productosFiltrados).then(()=>applyFilter(active));
+}
+
+  $("#btnES").addEventListener("click",()=>{ $("#btnES").classList.add("active"); $("#btnEN").classList.remove("active"); applyLang("es"); rerenderKeepingFilter(); });
+  $("#btnEN").addEventListener("click",()=>{ $("#btnEN").classList.add("active"); $("#btnES").classList.remove("active"); applyLang("en"); rerenderKeepingFilter(); });
+
+  // === Inicialización ===
+applyLang("es");               
+renderCards(productosFiltrados).then(()=>applyFilter("all"));  
+setWhatsAppLinks();            // Enlaces de WhatsApp listos
+  // === Carrusel Hero ===
+document.addEventListener('DOMContentLoaded', () => {
+  const hero = document.querySelector('.slider-hero');
+  if (!hero) return;
+
+  const heroSlides = hero.querySelectorAll('img');
+  const heroDots   = hero.querySelectorAll('.dot');
+  let heroIndex = 0;
+  let heroTimer = null;
+
+  function showHeroSlide(i){
+    heroIndex = (i + heroSlides.length) % heroSlides.length;
+    heroSlides.forEach((img, idx) => img.classList.toggle('active', idx === heroIndex));
+    heroDots.forEach((dot, idx) => dot.classList.toggle('active', idx === heroIndex));
+  }
+
+  function startHeroAuto(){
+    stopHeroAuto();
+    heroTimer = setInterval(() => showHeroSlide(heroIndex + 1), 5000);
+  }
+
+  function stopHeroAuto(){
+    if (heroTimer) clearInterval(heroTimer);
+  }
+
+  heroDots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      showHeroSlide(idx);
+      startHeroAuto(); // reinicia el autoplay al hacer click
+    });
+  });
+let x0=null;
+hero.addEventListener('touchstart', e=>x0=e.touches[0].clientX,{passive:true});
+hero.addEventListener('touchend', e=>{
+  if(x0==null) return;
+  const dx = e.changedTouches[0].clientX - x0;
+  if(Math.abs(dx)>40) showHeroSlide(heroIndex + (dx<0?1:-1));
+  startHeroAuto();
+  x0=null;
+});
+  // inicia
+  showHeroSlide(0);
+  startHeroAuto();
+});
+
+</script>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl505336'},{'dcenter':'p3'},{'cp_id':'10568735'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>

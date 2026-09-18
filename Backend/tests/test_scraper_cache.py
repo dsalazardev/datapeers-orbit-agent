@@ -76,3 +76,41 @@ async def test_fetch_failure_without_seed_raises_fetch_failed(tmp_path):
             await service.pre_scrape(URL)
 
     assert excinfo.value.reason_code is ScrapeReasonCode.FETCH_FAILED
+
+
+class _NeverCalledClassifier:
+    """Bomb classifier: the cache/seed paths MUST NOT invoke it (task 6.8)."""
+
+    async def classify(self, items):
+        raise AssertionError("LLM classifier must not run on cache/seed paths")
+
+
+@pytest.mark.anyio
+async def test_cache_and_seed_paths_never_run_the_classifier(tmp_path):
+    """Task 6.8: cached and seeded responses carry additive fields = None and
+    never touch the LLM classifier."""
+    cache = JsonFilePrefetchCache(tmp_path, ttl_seconds=3600, seed_enabled=False)
+    bomb = _NeverCalledClassifier()
+
+    async with httpx.AsyncClient(transport=httpx.MockTransport(_ok_handler)) as client:
+        first = await PreScraperService(ScraperConfig(), cache, client=client).pre_scrape(URL)
+    assert first.source == "live"
+
+    # 1) cache hit after first live — classifier must not be consulted
+    async with httpx.AsyncClient(transport=httpx.MockTransport(_fail_handler)) as offline:
+        second = await PreScraperService(
+            ScraperConfig(), cache, client=offline, classifier=bomb
+        ).pre_scrape(URL)
+    assert second.source == "cache"
+    assert second.items[0].is_active_project is None
+
+    # 2) seed fallback — classifier must not be consulted
+    seeded = JsonFilePrefetchCache(
+        tmp_path / "seeded", seed=SEED, ttl_seconds=3600, seed_enabled=True
+    )
+    async with httpx.AsyncClient(transport=httpx.MockTransport(_fail_handler)) as offline:
+        result = await PreScraperService(
+            ScraperConfig(), seeded, client=offline, classifier=bomb
+        ).pre_scrape(URL)
+    assert result.source == "seed"
+    assert result.items[0].is_active_project is None
