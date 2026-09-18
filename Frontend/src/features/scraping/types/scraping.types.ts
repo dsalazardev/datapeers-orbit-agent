@@ -3,6 +3,12 @@ export const DEFAULT_MAX_ITEMS = 10
 
 export type ProjectSource = 'meta' | 'card' | 'link'
 
+export type StatusBadge =
+  | 'Preventa'
+  | 'Entrega Inmediata'
+  | 'Agotado'
+  | 'Desconocido'
+
 export interface PreScrapeRequest {
   url: string
   max_items?: number
@@ -13,12 +19,20 @@ export interface ProjectItem {
   title: string
   url: string
   source: ProjectSource
+  is_active_project?: boolean | null
+  status_badge?: StatusBadge | null
+  price_from?: string | null
+}
+
+export interface ScrapeMeta {
+  filtered_out: number
 }
 
 export interface PreScrapeResponse {
   url: string
   items: ProjectItem[]
   truncated: boolean
+  meta?: ScrapeMeta | null
 }
 
 export type ScrapeReasonCode =

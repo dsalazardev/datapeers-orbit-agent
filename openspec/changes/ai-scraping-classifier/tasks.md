@@ -44,11 +44,11 @@
 
 ## 7. Verificación
 
-- [ ] 7.1 Ejecutar `openspec validate ai-scraping-classifier` sin errores
-- [ ] 7.2 Ejecutar la suite de backend en verde (tests existentes + nuevos)
-- [ ] 7.3 Verificar arranque `uvicorn app.main:app` y una llamada manual a `POST /api/v1/scraping/pre-scrape` con y sin API key (fallback visible)
+- [x] 7.1 Ejecutar `openspec validate ai-scraping-classifier` sin errores
+- [x] 7.2 Ejecutar la suite de backend en verde (tests existentes + nuevos)
+- [x] 7.3 Verificar arranque `uvicorn app.main:app` y una llamada manual a `POST /api/v1/scraping/pre-scrape` con y sin API key (fallback visible)
 
 ## 8. Coordinación frontend (tipos opcionales)
 
-- [ ] 8.1 Ampliar tipos opcionales en `Frontend/src/features/scraping/types/scraping.types.ts` (`is_active_project`, `status_badge`, `price_from` y `meta`) — aditivo, no breaking
-- [ ] 8.2 Verificar el build del frontend sin errores (script `build` de `Frontend/package.json`, p. ej. `pnpm build`)
+- [x] 8.1 Ampliar tipos opcionales en `Frontend/src/features/scraping/types/scraping.types.ts` (`is_active_project`, `status_badge`, `price_from` y `meta`) — aditivo, no breaking
+- [x] 8.2 Verificar el build del frontend sin errores (script `build` de `Frontend/package.json`, p. ej. `pnpm build`)
