@@ -13,7 +13,7 @@ import httpx
 import pytest
 
 from app.main import create_app
-from app.modules.ingestion.infrastructure.settings import Settings
+from app.core.settings import Settings
 from tests.doubles import FakeHostResolver, RecordingScheduler
 
 

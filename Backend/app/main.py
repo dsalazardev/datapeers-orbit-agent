@@ -25,13 +25,16 @@ from app.modules.ingestion.application.use_cases import (
     GetOnboardingState,
     StartUrlIngestion,
 )
-from app.modules.ingestion.infrastructure.logging import request_id_var, setup_logging
+from app.core.logging import request_id_var, setup_logging
 from app.modules.ingestion.infrastructure.resolver import SystemHostResolver
 from app.modules.ingestion.infrastructure.scheduler import BackgroundTasksScheduler
-from app.modules.ingestion.infrastructure.settings import Settings
+from app.core.settings import Settings
 from app.modules.ingestion.infrastructure.store import InMemoryOnboardingStateStore
 from app.modules.ingestion.router import router as ingestion_router
+from app.modules.scraping.cache import JsonFilePrefetchCache
+from app.modules.scraping.config import ScraperConfig
 from app.modules.scraping.router import router as scraping_router
+from app.modules.scraping.service import PreScraperService
 
 logger = logging.getLogger("orbit.ingestion")
 
@@ -44,12 +47,24 @@ def _default_scheduler_factory(background_tasks: BackgroundTasks) -> IngestionSc
     return BackgroundTasksScheduler(background_tasks)
 
 
+def _default_pre_scraper(settings: Settings) -> PreScraperService:
+    config = ScraperConfig.from_settings(settings)
+    cache = JsonFilePrefetchCache.with_seed_file(
+        settings.scraper_cache_dir,
+        seed_path=settings.scraper_seed_file,
+        ttl_seconds=settings.scraper_cache_ttl,
+        seed_enabled=settings.scraper_seed_enabled,
+    )
+    return PreScraperService(config=config, cache=cache)
+
+
 def create_app(
     settings: Settings | None = None,
     resolver: HostResolver | None = None,
     store: OnboardingStateStore | None = None,
     pipeline: IngestionPipeline | None = None,
     scheduler_factory: SchedulerFactory | None = None,
+    pre_scraper: PreScraperService | None = None,
 ) -> FastAPI:
     settings = settings or Settings()
     setup_logging(settings.log_level)
@@ -67,6 +82,9 @@ def create_app(
     app.state.get_onboarding = GetOnboardingState(store=store)
     app.state.scheduler_factory = scheduler_factory or _default_scheduler_factory
 
+    pre_scraper = pre_scraper or _default_pre_scraper(settings)
+    app.state.pre_scraper = pre_scraper
+
     @app.middleware("http")
     async def correlation_id(
         request: Request, call_next: Callable[[Request], Awaitable[Response]]
@@ -80,6 +98,10 @@ def create_app(
             request_id_var.reset(token)
         response.headers[REQUEST_ID_HEADER] = request_id
         return response
+
+    @app.get("/health")
+    async def health() -> dict[str, str]:
+        return {"status": "ok"}
 
     @app.get("/")
     async def root():

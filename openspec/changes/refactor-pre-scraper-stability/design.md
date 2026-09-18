@@ -52,6 +52,8 @@ Backend/app/modules/scraping/
 
 **Por qué `scraping` usa un layout plano y no hexágono completo**: a diferencia de `ingestion` (que exige dominio puro, puertos y adaptadores sustituibles por contrato ORB-CON-015), el módulo `scraping` es pequeño y de flujo lineal — HTTP → parseo → DTO — sin infraestructura que sustituir ni caso de uso persistente. Tres capas de abstracción (domain/application/infrastructure con puertos) serían sobre-ingeniería aquí: `parser.py` ya es puro (sin I/O de red, recibe reglas por parámetro) y `config.py` externaliza las reglas de cliente, cubriendo los dos requisitos de testabilidad y desacople que importan con un solo nivel de paquete. Si el deep-scraping asíncrono (P1) madura el flujo con pipeline e infraestructura real, se adopta el patrón hexágono en ese momento, no antes.
 
+**Normalización `grouping → link` (fuera de `parser.py`, en el orquestador)**: `parser.py` conserva la fuente semántica `"grouping"` en sus candidatos porque es información útil para la cascada y el fallback; sin embargo `PreScraperService` la normaliza a `"link"` antes de construir el DTO. La razón es doble: (1) `schemas.py` no se toca — `ProjectItem.source` sigue siendo `Literal["meta", "card", "link"]` (schemas.py:17) — y (2) el `pre_scraper.py` original sí construía `ProjectItem(source="grouping")` cuando `extract_candidates` devolvía la lista `grouping` de fallback, lo que provocaba un `ValidationError` de Pydantic latente. Normalizar en el borde mantiene el contrato público intacto y elimina ese bug sin ensuciar `schemas.py` ni el parser.
+
 ### D2: Patrón exacto de envoltorio con `anyio.to_thread.run_sync`
 
 Todo el parseo CPU-bound se envuelve en `anyio.to_thread.run_sync` (sin crear un executor manual; `anyio` ya está disponible vía FastAPI/Starlette y respeta el límite de threads del event loop). No se usa `asyncio.to_thread` para mantener la compatibilidad con backends/utilities de `anyio` (ya en el árbol de dependencias) y su gestión de cancellation scope.
@@ -82,11 +84,13 @@ def _extract_sync(self, soup: BeautifulSoup, base_url: str) -> list[Candidate]:
 Reglas del patrón:
 
 - **Solo el parseo y la extracción van al thread**: el fetch (`httpx.AsyncClient`) y la serialización de la respuesta permanecen `await` en el event loop.
-- **Un único parseo por solicitud**: `parse_html` se llama una vez; el `soup` resultante se pasa a los extractores (meta → cards → links) y al fallback de navegación, eliminando el segundo `BeautifulSoup(html)` de `_extract_from_navigation`.
+- **Un único parseo y un único DOM por solicitud**: `parse_html` se llama una vez y todo el trabajo ocurre sobre el mismo árbol. La navegación se lee primero en sus propios buckets (con su propio `seen`), luego `_prune_navigation` poda el árbol **in situ** (sin `copy.copy`) y los extractores (meta → cards → links) corren sobre ese árbol ya podado; los candidatos de navegación se fusionan al final deduplicando contra `seen_urls` y respetando la precedencia meta > cards > links > navegación. Esto elimina tanto el segundo `BeautifulSoup(html)` de `_extract_from_navigation` como el clon estructural intermedio (`copy.copy`).
 - **Orden**: `html = await _fetch(...)` (async) → `soup = await _parse_html_async(html)` (thread) → `candidates = await _extract_async(soup, url)` (thread) → construir `ProjectItem`s (puro, en el loop).
 - **Error handling**: si el thread lanza (parseo malformado), la excepción se captura en el orquestador y se traduce a `ORB-SCRAPE-002` (ver D4). `to_thread.run_sync` propaga la excepción awaitable de forma estándar.
 
 **Nota de rendimiento**: Python 3.14t (free-threaded) + la liberación del GIL hacen que el parseo en thread sea especialmente efectivo para concurrencia.
+
+**Medición del test de concurrencia (50 pre-scrapes concurrentes, P95 de `GET /health`)**: la medición corre in-process con `httpx.ASGITransport(app=app)` (sin servidor `uvicorn` ni hilo de fondo), por lo que el P95 de `/health` mide directamente cuánto tarda el event loop en atender mientras el parseo está en vuelo; si el parseo bloqueara el loop, ese P95 subiría con él. En CPython 3.14t free-threaded (`PYTHON_GIL=0`) se mantiene muy por debajo del umbral (**~3.5 ms** medidos). Con el GIL activo el escenario degrada (~917 ms con 400 tarjetas y >5 s con 1500), por lo que el test se omite fuera de 3.14t con `skipif(sys._is_gil_enabled(), ...)`; la ejecución continua en CI queda fuera del alcance de este change.
 
 ### D3: Estructura y ubicación de la caché local (JSON) y seeded fallback
 
@@ -182,10 +186,11 @@ El router recibe el servicio desde `app.state` (o vía dependencia FastAPI). El 
 ## Risks / Trade-offs
 
 - [Threads saturan el pool de `anyio` con muchos parsers pesados] → `to_thread.run_sync` usa el default que respeta el límite de threads por defecto de event loop; el límite de ítems (10) y `MAX_BODY_SIZE` acotan el trabajo; se mide con el test de 50 concurrentes.
-- [Parseo free-threaded (3.14t) con bs4] → `beautifulsoup4` es compatible con free-threading (verificada en build actual); el thread pool además mitiga cualquier liberación parcial del GIL en Caso de lxml.
+- [Parseo free-threaded (3.14t) con bs4] → `beautifulsoup4` es compatible con free-threading (verificada en build actual); el thread pool además mitiga cualquier liberación parcial del GIL. El test de concurrencia (ASGITransport, in-process) mide P95 ~3.5 ms en 3.14t vs ~917 ms en 3.14 estándar (400 tarjetas), y se omite fuera de 3.14t con `skipif(sys._is_gil_enabled(), ...)`.
 - [Caché en disco stale (resultado obsoleto)] → `ttl_seconds` por entrada + `cached_at`; hit expirado = miss y se re-consume.
 - [Seed fallback enmascara URLs reales caídas en producción (no demo)] → el log estructurado registra `source=seed`; el seed vive en `seed.json` versionado y se documenta como exclusivo para demo; en producción puede deshabilitarse con `ORBIT_SCRAPER_SEED_ENABLED=false`.
-- [El re-parseo único cambia matices del fallback de navegación] → `_extract_from_navigation` ahora reusa el `soup` podado; se añade una regresión con fixture HTML local de un sitio real de constructora para cubrir el caso y se re-ejecuta en tests.
+- [Un único DOM cambia matices del fallback de navegación] → la navegación se lee antes de podar y se fusiona al final; se añadió un test de caracterización (`test_scraper_navigation_fallback.py`) que fija como *golden* el output exacto de la implementación previa (con `copy.copy`) para el fallback de navegación, el retorno de `grouping`, la precedencia body-sobre-nav y los duplicados intra-nav por selectores solapados, y se verificó byte-a-byte tras el refactor.
+- [Eliminar `copy.copy` cambia el comportamiento observable] → mitigado por el test de caracterización anterior, que corre con `copy.copy` como golden antes del cambio y debe permanecer idéntico después (4 casos, `assert` por valor).
 - [Cambio en el formato de error es BREAKING para el frontend] → el modal actual renderiza `detail`; se reemplaza por un mapeo `reason_code → mensaje` en el cliente dentro del mismo PR, se coordina el contrato en el mismo commit y se valida el build.
 
 ## Migration Plan

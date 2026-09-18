@@ -19,3 +19,9 @@ class Settings(BaseSettings):
 
     app_env: str = "local"
     log_level: str = "INFO"
+    scraper_timeout: float = 10.0
+    scraper_max_body_size: int = 2 * 1024 * 1024
+    scraper_cache_dir: str = ".cache/scraping"
+    scraper_seed_file: str | None = None
+    scraper_seed_enabled: bool = True
+    scraper_cache_ttl: int = 3600

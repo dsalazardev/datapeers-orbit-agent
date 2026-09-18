@@ -12,7 +12,9 @@ import httpx
 import pytest
 
 from app.main import create_app
-from app.modules.scraping.services.pre_scraper import PreScraper
+from app.modules.scraping.cache import JsonFilePrefetchCache
+from app.modules.scraping.config import ScraperConfig
+from app.modules.scraping.service import PreScraperService
 
 HTML = """
 <html>
@@ -26,16 +28,21 @@ HTML = """
 
 
 @pytest.mark.anyio
-async def test_pre_scrape_endpoint_still_returns_detected_projects(monkeypatch):
+async def test_pre_scrape_endpoint_still_returns_detected_projects(tmp_path):
     """ORB-FR-021 — pre-scrape keeps detecting projects without breaking."""
     async def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(200, text=HTML, headers={"content-type": "text/html"})
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as mock_client:
-        monkeypatch.setattr(
-            "app.modules.scraping.router._pre_scraper", PreScraper(client=mock_client)
+        cache = JsonFilePrefetchCache(
+            tmp_path, ttl_seconds=3600, seed_enabled=False
         )
-        app = create_app()
+        service = PreScraperService(
+            config=ScraperConfig(),
+            cache=cache,
+            client=mock_client,
+        )
+        app = create_app(pre_scraper=service)
         async with httpx.AsyncClient(
             transport=httpx.ASGITransport(app=app), base_url="http://test"
         ) as client:

@@ -20,3 +20,22 @@ export interface PreScrapeResponse {
   items: ProjectItem[]
   truncated: boolean
 }
+
+export type ScrapeReasonCode =
+  | 'ORB-SCRAPE-000'
+  | 'ORB-SCRAPE-001'
+  | 'ORB-SCRAPE-002'
+  | 'ORB-SCRAPE-003'
+  | 'ORB-SCRAPE-004'
+  | 'ORB-SCRAPE-005'
+
+export interface ScrapeErrorDetail {
+  reason_code: ScrapeReasonCode | string
+  message: string
+  request_id: string
+  http_status: number
+}
+
+export interface ScrapeErrorResponse {
+  error: ScrapeErrorDetail
+}

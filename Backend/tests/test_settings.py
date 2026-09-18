@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from app.modules.ingestion.infrastructure.settings import Settings
+from app.core.settings import Settings
 
 
 def test_defaults_match_the_documented_env_example():
